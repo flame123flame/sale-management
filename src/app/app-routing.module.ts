@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './module/home/home.component';
 import { NoAuthGuard } from './core/guards/noAuth.guard';
+import { DashboardComponent } from './module/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
       layout: LayoutType.AUTH
     },
     children: [
-      { path: '', component: HomeComponent }
+      { path: '', component: DashboardComponent }
     ]
   },
  
@@ -30,8 +31,8 @@ const routes: Routes = [
  
   {
     path: 'sign-in',
-    canActivate: [NoAuthGuard],
-    canActivateChild: [NoAuthGuard],
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: LayoutComponent,
     data: {
       layout: LayoutType.NO_AUTH
@@ -40,6 +41,32 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./module/authentication/login/login.module').then(m => m.LoginModule), }
     ]
   },
+   {
+    path: 'user',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    data: {
+      layout: LayoutType.AUTH
+    },
+    children: [
+      { path: '', loadChildren: () => import('./module/user/user.module').then(m => m.UserModule), }
+    ]
+  },
+
+  {
+    path: 'products',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    data: {
+      layout: LayoutType.AUTH
+    },
+    children: [
+      { path: '', loadChildren: () => import('./module/products/products.module').then(m => m.ProductsModule), }
+    ]
+  },
+
 ];
 
 @NgModule({

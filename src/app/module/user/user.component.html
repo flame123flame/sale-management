@@ -1,0 +1,22 @@
+<p-button label="add" (click)="route()" />
+<p-table #datatableBusLine [value]="userFind" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="แสดง {first} ถึง {last} จาก {totalRecords} ทั้งหมดรายการ"
+      [rowsPerPageOptions]="[10, 25, 50]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ลำดับ</th>
+            <th>ชื่อ</th>
+            <th>ชื่อเล่น</th>
+            <th>ชื่อเต็ม</th>
+        </tr>
+    </ng-template>
+      <ng-template pTemplate="body" let-item let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td class="text-center">{{ item.username ?? '-' }} </td>
+          <td>{{ item.nickName ?? '-' }}</td>
+          <td>{{ item.fullName ?? '-' }} </td>
+        </tr>
+      </ng-template>
+</p-table>
