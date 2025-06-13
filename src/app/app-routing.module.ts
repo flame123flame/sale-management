@@ -31,8 +31,8 @@ const routes: Routes = [
  
   {
     path: 'sign-in',
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     component: LayoutComponent,
     data: {
       layout: LayoutType.NO_AUTH
@@ -64,6 +64,19 @@ const routes: Routes = [
     },
     children: [
       { path: '', loadChildren: () => import('./module/products/products.module').then(m => m.ProductsModule), }
+    ]
+  },
+
+  {
+    path: 'customers',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    data: {
+      layout: LayoutType.AUTH
+    },
+    children: [
+      { path: '', loadChildren: () => import('./module/customers/customers.module').then(m => m.CustomersModule), }
     ]
   },
 

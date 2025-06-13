@@ -13,7 +13,6 @@ import { SidebarMenu } from 'src/app/shared/interfaces/sidebar-menu.interface';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ConfirmationService, MessageService]
 })
 export class LoginComponent implements OnInit {

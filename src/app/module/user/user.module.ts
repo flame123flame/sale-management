@@ -8,7 +8,7 @@ import { AddUserComponent } from './addUser/addUser.component';
 import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
-  { path: '', component: UserComponent },
+  {path: '', component: UserComponent },
   {path: 'addUser', component: AddUserComponent}
 ];
 

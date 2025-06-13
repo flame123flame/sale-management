@@ -35,8 +35,20 @@ export class UserComponent implements OnInit {
     })
   }
 
+    adminCheck(checkUse: string){
+      return checkUse !=='admin';
+  }
+
   route() {
     this.router.navigate(["user/addUser"]);
+  }
+
+  edit(userId: number) {
+    this.router.navigate(["user/addUser"], { queryParams: { userId: userId, action: "EDIT" } });
+  }
+
+  detail(userId: number) {
+   this.router.navigate(["user/addUser"], { queryParams: { userId: userId,  action: "DETAIL"} });
   }
 }
 
