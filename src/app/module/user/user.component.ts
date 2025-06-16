@@ -35,6 +35,12 @@ export class UserComponent implements OnInit {
     })
   }
 
+  deleteUser(userId: number){
+    this.service.deleteUser(userId).subscribe((response: any) => {
+      this.findUser();
+    })
+  }
+
     adminCheck(checkUse: string){
       return checkUse !=='admin';
   }

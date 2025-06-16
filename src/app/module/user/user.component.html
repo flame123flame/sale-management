@@ -27,7 +27,8 @@
           <button class="custom-button" style="background-color: #6366f1;" (click)="detail(item.id)">
             <i class="pi pi-file-o" style="font-size: 1rem"></i>
           </button>
-          <button *ngIf="adminCheck(item.username)" class="custom-button" style="background-color: #ee3f32;">
+          <button *ngIf="adminCheck(item.username)" class="custom-button" style="background-color: #ee3f32;"
+          (click)="deleteUser(item.id)">
             <i class="pi pi-trash" style="font-size: 1rem"></i>
           </button>
         </div>

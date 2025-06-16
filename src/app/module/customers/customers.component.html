@@ -1,0 +1,39 @@
+<div class="flex justify-content-end mb-3">
+  <p-button label="+ เพิ่มผู้ใช้งาน"  />
+</div>
+<p-table #datatableBusLine styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"
+  [showCurrentPageReport]="true" currentPageReportTemplate="แสดง {first} ถึง {last} จาก {totalRecords} ทั้งหมดรายการ"
+  [rowsPerPageOptions]="[10, 25, 50]">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ลำดับ</th>
+      <th>ชื่อ</th>
+      <th>ที่อยู่</th>
+      <th>เบอร์โทร</th>
+      <th>อีเมล</th>
+      <th>จัดการ</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-i="rowIndex">
+    <tr>
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.fullName ?? '-' }}</td>
+      <td>{{ item.address ?? '-' }}</td>
+      <td>{{ item.phone ?? '-' }} </td>
+      <td>{{ item.email ?? '-' }} </td>
+      <td style="width: 180px;">
+        <div class="flex justify-center gap-4">
+          <button class="custom-button" style="background-color: rgb(224, 171, 37);">
+            <i class="pi pi-pencil" style="font-size: 1rem"></i>
+          </button>
+          <button class="custom-button" style="background-color: #6366f1;">
+            <i class="pi pi-file-o" style="font-size: 1rem"></i>
+          </button>
+          <button  class="custom-button" style="background-color: #ee3f32;">
+            <i class="pi pi-trash" style="font-size: 1rem"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

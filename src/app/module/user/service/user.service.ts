@@ -36,4 +36,9 @@ export class UserService {
     );
   }
 
+  deleteUser(userId: number) {
+    return this.http.delete(
+      environment.api_url + '/api/users/delete?id=' + userId,
+    );
+  }
 }
