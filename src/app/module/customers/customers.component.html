@@ -1,7 +1,7 @@
 <div class="flex justify-content-end mb-3">
-  <p-button label="+ เพิ่มผู้ใช้งาน"  />
+  <p-button label="+ เพิ่มลูกค้า" (click)="route()"/>
 </div>
-<p-table #datatableBusLine styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"
+<p-table #datatableBusLine [value]="customersFind" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"
   [showCurrentPageReport]="true" currentPageReportTemplate="แสดง {first} ถึง {last} จาก {totalRecords} ทั้งหมดรายการ"
   [rowsPerPageOptions]="[10, 25, 50]">
   <ng-template pTemplate="header">
@@ -23,13 +23,13 @@
       <td>{{ item.email ?? '-' }} </td>
       <td style="width: 180px;">
         <div class="flex justify-center gap-4">
-          <button class="custom-button" style="background-color: rgb(224, 171, 37);">
+          <button class="custom-button"  style="background-color: rgb(224, 171, 37);" (click)="edit(item.id)">
             <i class="pi pi-pencil" style="font-size: 1rem"></i>
           </button>
-          <button class="custom-button" style="background-color: #6366f1;">
+          <button class="custom-button" style="background-color: #6366f1;" (click)="detail(item.id)" >
             <i class="pi pi-file-o" style="font-size: 1rem"></i>
           </button>
-          <button  class="custom-button" style="background-color: #ee3f32;">
+          <button  class="custom-button" style="background-color: #ee3f32;" (click)="deleteCustomers(item.id)">
             <i class="pi pi-trash" style="font-size: 1rem"></i>
           </button>
         </div>

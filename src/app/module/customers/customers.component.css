@@ -1,0 +1,12 @@
+.custom-button {
+  color: #fff;
+  border: 1px;
+  border: solid;
+  border-radius: 6px;
+  padding-top: 0.75rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  border-bottom-width: 1px;
+border-left-width: 1px;
+}
