@@ -11,7 +11,7 @@ export interface Customers {
   address: string;
   id: number;
 }
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
@@ -22,9 +22,10 @@ export interface Customers {
 })
 export class CustomersComponent implements OnInit {
 
-  constructor(private service: CustomersService,private _cdr: ChangeDetectorRef,private router: Router) { }
+  constructor(private service: CustomersService, private _cdr: ChangeDetectorRef, private router: Router) { }
   customersFind: Customers[] = [];
-
+  visibleDelete: boolean = false;
+  customerId: number | null = null;
 
   ngOnInit() {
     this.findCustomers();
@@ -46,11 +47,17 @@ export class CustomersComponent implements OnInit {
   }
 
   detail(customersId: number) {
-   this.router.navigate(["customers/addCustomers"], { queryParams: { customerId: customersId,  action: "DETAIL"} });
+    this.router.navigate(["customers/addCustomers"], { queryParams: { customerId: customersId, action: "DETAIL" } });
   }
 
-  deleteCustomers(customerId: number){
-   this.service.deleteCustomer(customerId).subscribe((response: any) => {
+  confirmDelete(customerId: number) {
+    this.visibleDelete = true;
+    this.customerId = customerId;
+
+  }
+  deleteCustomers() {
+    this.visibleDelete = false;
+    this.service.deleteCustomer(this.customerId!).subscribe((response: any) => {
       this.findCustomers();
     })
   }
