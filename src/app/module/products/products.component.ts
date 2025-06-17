@@ -12,7 +12,8 @@ export interface Products{
   description: string,
   price: number,
   stock_quantity: number,
-  is_active: string
+  is_active: string,
+  id: number
 }
 
 @Component({
@@ -29,6 +30,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(private service: ProductsService, private crd: ChangeDetectorRef, private router: Router) { }
   productsFind: Products[] = []
+  visibleDelete: boolean = false;
+  productsId: number | null = null;
   
   ngOnInit(){
     this.findProducts();
@@ -45,6 +48,20 @@ export class ProductsComponent implements OnInit {
 
    route() {
     this.router.navigate(['products/addProducts']);
+  }
+
+
+  confirmDelete(productsId: number) {
+    this.visibleDelete = true;
+    this.productsId = productsId;
+
+  }
+
+  deletePro(){
+    this.visibleDelete = false;
+    this.service.deleteProducts(this.productsId!).subscribe((response: any) => {
+      this.findProducts();
+    })
   }
 }
 

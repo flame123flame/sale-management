@@ -15,10 +15,22 @@ constructor(private http: HttpClient) { }
     );
   }
 
+  findId(productsId: number) {
+    return this.http.get(
+      environment.api_url + '/api/products/findById?id=' + productsId,
+    );
+  }
+  
   createProducts(createProducts: object){
     return this.http.post(
       environment.api_url + '/api/products/create',
       createProducts
+    );
+  }
+
+  deleteProducts(productsId: number) {
+    return this.http.delete(
+      environment.api_url + '/api/products/delete?id=' + productsId,
     );
   }
 }
