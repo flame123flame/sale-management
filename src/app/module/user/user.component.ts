@@ -23,6 +23,8 @@ export class UserComponent implements OnInit {
 
   constructor(private service: UserService, private _cdr: ChangeDetectorRef, private router: Router) { }
   userFind: User[] = [];
+  visibleDelete: boolean = false;
+  userId: number | null = null;
 
   ngOnInit() {
     this.findUser();
@@ -35,8 +37,15 @@ export class UserComponent implements OnInit {
     })
   }
 
-  deleteUser(userId: number){
-    this.service.deleteUser(userId).subscribe((response: any) => {
+
+  confirmDelete(userId: number) {
+    this.visibleDelete = true;
+    this.userId = this.userId;
+
+  }
+
+  deleteUser(){
+    this.service.deleteUser(this.userId!).subscribe((response: any) => {
       this.findUser();
     })
   }

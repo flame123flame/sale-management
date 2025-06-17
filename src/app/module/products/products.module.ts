@@ -10,7 +10,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProductsComponent],
+  declarations: [],
     imports: [RouterModule.forChild(routes), PrimeNgModule, SharedAppModule],
 })
 export class ProductsModule { }

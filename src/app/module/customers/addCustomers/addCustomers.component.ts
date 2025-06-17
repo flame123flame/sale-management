@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomersService } from '../service/customers.service';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
@@ -14,14 +14,13 @@ import { take } from 'rxjs';
   imports: [PrimeNgModule, SharedAppModule],
 })
 export class AddCustomersComponent implements OnInit {
-  [x: string]: any;
 
   secSelection = new FormGroup({
     id: new FormControl<number | null>(null),
-    fullName: new FormControl<string>(''),
-    email: new FormControl<string>(''),
-    phone: new FormControl<number | null>(null),
-    address: new FormControl<string>(''),
+    fullName: new FormControl<string>('',Validators.required),
+    email: new FormControl<string>('',[Validators.required, Validators.email]),
+    phone: new FormControl('',[Validators.required,Validators.pattern('^[0-9]{10}$')]),
+    address: new FormControl<string>('',Validators.required),
   })
 
   action: string = 'ADD';

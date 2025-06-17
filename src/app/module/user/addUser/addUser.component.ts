@@ -27,10 +27,10 @@ export class AddUserComponent implements OnInit {
 
   secSection = new FormGroup({
     id: new FormControl<number | null>(null),
-    fullName: new FormControl<string>(''),
-    nickName: new FormControl<string>(''),
-    username: new FormControl<string>(''),
-    password: new FormControl<string>(''),
+    fullName: new FormControl<string>('',Validators.required),
+    nickName: new FormControl<string>('',Validators.required),
+    username: new FormControl<string>('',Validators.required),
+    password: new FormControl<string>('',Validators.required),
   });
 
   action: string = 'ADD';
