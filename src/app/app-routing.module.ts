@@ -26,6 +26,18 @@ const routes: Routes = [
       { path: '', component: DashboardComponent }
     ]
   },
+  {
+    path: 'categories',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    data: {
+      layout: LayoutType.AUTH
+    },
+    children: [
+      { path: '', loadChildren: () => import('./module/categories/categories.module').then(m => m.CategoriesModule), }
+    ]
+  },
  
   
  

@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CustomersService } from './service/customers.service';
-import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
-import { Router } from '@angular/router';
+import { PrimeNgModule } from 'src/app/shared/primeng.module';
 
 export interface Customers {
   email: string;
@@ -12,13 +11,14 @@ export interface Customers {
   id: number;
 }
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [PrimeNgModule, SharedAppModule],
+    standalone: true,
+    imports: [PrimeNgModule, SharedAppModule],
 })
 export class CustomersComponent implements OnInit {
 

@@ -4,7 +4,8 @@ import { CustomersComponent } from './customers.component';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CategoriesComponent } from '../categories/categories.component';
 import { AddCustomersComponent } from './addCustomers/addCustomers.component';
 
 const routes: Routes = [
@@ -14,6 +15,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [],
-    imports: [RouterModule.forChild(routes), PrimeNgModule, SharedAppModule, HttpClientModule],
+    imports: [RouterModule.forChild(routes), PrimeNgModule, SharedAppModule,HttpClientModule],
 })
 export class CustomersModule { }

@@ -24,10 +24,12 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
 import { PrimeNgModule } from './shared/primeng.module';
 import { DashboardComponent } from './module/dashboard/dashboard.component';
+import { CategoriesComponent } from './module/categories/categories.component';
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
+    
   ],
   imports: [
     PrimeNgModule,
