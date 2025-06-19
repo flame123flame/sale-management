@@ -10,12 +10,12 @@
             <div class="image-text">
               <span class="image">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/BMTA_Logo2014-th.svg/250px-BMTA_Logo2014-th.svg.png"
+                  src="./assets/images/logoeasyshop.png"
                   alt="logo" />
               </span>
               <div class="text logo-text">
-                <span class="name">องค์การขนส่งมวลชนกรุงเทพ</span>
-                <span class="profession">Bangkok Mass Transit Authority</span>
+                <span class="name">Easy Shop</span>
+                <span class="profession">ระบบขายสินค้าออนไลน์</span>
               </div>
             </div>
           </header>
@@ -24,7 +24,7 @@
               <ul class="menu-links">
                 <li class="nav-link" *ngFor="let item of items">
                   <a [routerLink]="item.router" [ngClass]="{ active: isActive(item.router) }">
-                    <i class="pi {{ item.icon }}" style="font-size: 1.4rem; margin-left: 16px; margin-right: 10px"></i>
+                    <i class="pi {{ item.icon }}" style=" font-size: 1.4rem; margin-left: 16px; margin-right: 10px"></i>
                     <span class="text nav-text ml-2"> {{ item.menu_th }}</span>
                   </a>
                 </li>

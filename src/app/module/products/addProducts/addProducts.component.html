@@ -1,7 +1,41 @@
-
-<div class="grid mt-5" style=" justify-content: center;">
-    <div class="flex gap-4">
-      <p-button  label="บันทึกข้อมูล" severity="success"/>
-      <p-button label="กลับ" severity="info" (click)="goBack()" />
+<form>
+  <div class="p-3">
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ชื่อ<span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="name" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>คำอธิบาย<span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="description" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ราคา <span style="color: red">*</span></label>
+          <div>
+            <input type="number" pInputText formControlName="price" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>จำนวนสินค้า <span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="email" />
+          </div>
+        </div>
+      </div>
+      <p-dropdown>
+        
+      </p-dropdown>
     </div>
-</div>
+  </div>
+</form>

@@ -41,13 +41,15 @@ export class ProductsComponent implements OnInit {
     this.service.findProducts().subscribe((response: any) => {
       this.productsFind = response.data;
       this.crd.markForCheck();
-      console.log(this.productsFind);
-      
     })
   }
 
-   route() {
+  route() {
     this.router.navigate(['products/addProducts']);
+  }
+
+  productsList(){
+    this.router.navigate(['products/productsList'])
   }
 
 

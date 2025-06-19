@@ -29,18 +29,18 @@ export class AddProductsComponent implements OnInit {
     id: new FormControl<number | null>(null),
     category_id: new FormControl<number | null>(null),
     stock_quantity: new FormControl<number | null>(null),
-    name: new FormControl<string>('',Validators.required),
-    description: new FormControl<string>('',Validators.required),
-    is_active: new FormControl<string>('',Validators.required)
+    name: new FormControl<string>('', Validators.required),
+    description: new FormControl<string>('', Validators.required),
+    is_active: new FormControl<string>('', Validators.required)
   });
 
-  constructor(private fb: FormBuilder, private service: ProductsService, 
-      private route: ActivatedRoute, private checks: Router, private router: Router) { }
+  constructor(private fb: FormBuilder, private service: ProductsService,
+    private route: ActivatedRoute, private checks: Router, private router: Router) { }
 
   ngOnInit() {
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['products']);
   }
 
@@ -59,4 +59,5 @@ export class AddProductsComponent implements OnInit {
       );
     });
   }
+
 }

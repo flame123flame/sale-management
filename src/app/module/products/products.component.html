@@ -1,6 +1,9 @@
-<div class="flex justify-content-end mb-3">
+<div class="flex justify-content-end mb-3 gap-4">
     <p-button label="+ เพิ่มสินค้า" (click)="route()">
          <i class="pi pi-shopping-cart" style="font-size: 1rem"></i>
+    </p-button>
+    <p-button (click)="productsList()">
+         <i class="pi pi-shopping-cart" style="font-size: 1.68rem"></i>
     </p-button>
 </div>
 <p-table #datatableBusLine [value]="productsFind" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"

@@ -12,13 +12,13 @@ constructor(private http: HttpClient) { }
 
 findCategories(){
     return this.http.get(
-        environment.api_url + 'api/categories/findCategories',
+        environment.api_url + '/api/categories/findCategories',
     );
 }
 
 createCategories(createCategories: Object){
     return this.http.post(
-        environment.api_url + 'api/categories/create',
+        environment.api_url + '/api/categories/create',
         createCategories
     );
 }
@@ -32,14 +32,14 @@ findId(categoriesId: number){
 
 editCategories(editCategories: Object){
     return this.http.post(
-        environment.api_url + 'api/categories/edit',
+        environment.api_url + '/api/categories/edit',
         editCategories
     );
 }
 
 deleteCategories(categoriesId:number){
     return this.http.delete(
-        environment.api_url + 'api/categories/delete?id=' + categoriesId
+        environment.api_url + '/api/categories/delete?id=' + categoriesId
     )
 }
   
