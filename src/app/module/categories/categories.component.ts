@@ -4,10 +4,10 @@ import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { CategoriesService } from './service/categories.service';
 import { Router } from '@angular/router';
 
-export interface Categories{
-  name:string;
-  discription:string;
-  id:number;
+export interface Categories {
+  name: string;
+  description: string;
+  id: number;
 }
 
 @Component({
@@ -24,12 +24,12 @@ export class CategoriesComponent implements OnInit {
   categoriesFind: Categories[] = [];
 
   ngOnInit() {
-      this.findCategories();
+    this.findCategories();
   }
 
   findCategories(){
     this.service.findCategories().subscribe((response:any) =>{
-      this.categoriesFind = response.date;
+      this.categoriesFind = response.data;
       this._cdr.markForCheck();
     })
   }

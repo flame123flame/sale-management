@@ -8,17 +8,15 @@
     <tr>
       <th>ลำดับ</th>
       <th>ชื่อ</th>
-      <th>ชื่อเล่น</th>
-      <th>ชื่อเต็ม</th>
+      <th>คำอธิบาย</th>
       <th>จัดการ</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item let-i="rowIndex">
     <tr>
       <td>{{ i + 1 }}</td>
-      <td>{{ item.username ?? '-' }}</td>
-      <td>{{ item.nickName ?? '-' }}</td>
-      <td>{{ item.fullName ?? '-' }} </td>
+      <td>{{ item.name ?? '-' }}</td>
+      <td>{{ item.description ?? '-' }}</td>
       <td style="width: 180px;">
         <div class="flex justify-center gap-4">
           <button class="custom-button" style="background-color: rgb(224, 171, 37);" (click)="edit(item.id)">
