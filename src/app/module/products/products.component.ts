@@ -91,5 +91,9 @@ export class ProductsComponent implements OnInit {
   edit(productsId: number) {
     this.router.navigate(["products/addProducts"], { queryParams: { productsId: productsId, action: "EDIT" } });
   }
+
+  detail(productsId: number) {
+   this.router.navigate(["products/addProducts"], { queryParams: { productsId: productsId,  action: "DETAIL"} });
+  }
 }
 

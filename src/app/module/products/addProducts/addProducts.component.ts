@@ -43,6 +43,7 @@ export class AddProductsComponent implements OnInit {
 
   categoryOptions: { label: string, value: number }[] = [];
 
+  action: string = 'ADD';
   constructor(private fb: FormBuilder, private service: ProductsService,
     private route: ActivatedRoute, private checks: Router, private router: Router) {
   }
@@ -55,24 +56,26 @@ export class AddProductsComponent implements OnInit {
     this.router.navigate(['products']);
   }
 
-  findById(productsId: number) {
-    this.service.findId(productsId).subscribe((response: any) => {
-      this.secSection.patchValue(
-        {
-          name: response.data.name,
-          category_id: response.data.category_id,
-          stock_quantity: response.data.stock_quantity,
-          description: response.data.description,
-          is_active: response.data.is_active
-        }
-      );
+  findByIdPro(productsId: number) {
+    this.service.findByIdPro(productsId).subscribe((res: any) => {
+      this.secSection.patchValue({
+        name: res.data.name,
+        description: res.data.description,
+        price: res.data.price,
+        stock_quantity: res.data.stock_quantity,
+        category_id: res.data.category_id,
+        is_active: res.data.is_active
+      });
     });
   }
 
   save(){
+    if(this.action === 'ADD') {
     this.service.createProducts(this.secSection.value).subscribe((response: any) => {
-      this.checks.navigate(["products"]);
     })
+    }else if(this.action == "EDIT"){
+      this.edit();
+    }
   }
 
   edit() {
@@ -89,6 +92,24 @@ export class AddProductsComponent implements OnInit {
         label: cat.name,
         value: cat.id
       }));
+      this.editOrDetail();
+    });
+  }
+
+  editOrDetail() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['action'] === 'EDIT') {
+        this.action = 'EDIT';
+        const productsId = Number(params['productsId']);
+        if (productsId) {
+          this.findByIdPro(productsId);
+        }
+      } else if (params['action'] == 'DETAIL') {
+        this.action = 'DETAIL';
+        const productsId = Number(params['productsId']);
+        this.findByIdPro(productsId);
+        this.secSection.disable();
+      }
     });
   }
 }

@@ -98,4 +98,6 @@ export class AddUserComponent implements OnInit {
   goBack(){
     this.router.navigate(['user']);
   }
+  
 }
+

@@ -15,9 +15,9 @@ constructor(private http: HttpClient) { }
     );
   }
 
-  findId(productsId: number) {
+  findByIdPro(productsId: number) {
     return this.http.get(
-      environment.api_url + '/api/products/findById?id=' + productsId,
+      environment.api_url + '/api/products/findByIdProducts?id=' + productsId,
     );
   }
   
@@ -42,7 +42,7 @@ constructor(private http: HttpClient) { }
 
    editProducts(editsProducts: object) {
     return this.http.post(
-      environment.api_url + '/api/products/edit',
+      environment.api_url + '/api/products/edit', 
       editsProducts
     );
   }
