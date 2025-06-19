@@ -40,7 +40,7 @@ export class AddCustomersComponent implements OnInit {
         this.action = 'DETAIL';
         const customersId = Number(params['customerId']);
         console.log(customersId);
-        
+
         this.findByIdCustomer(customersId);
         this.secSelection.disable();
       }
