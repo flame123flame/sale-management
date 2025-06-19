@@ -6,6 +6,7 @@ import { ProductsService } from './service/products.service';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { Route, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 export interface Products{
   name: string,
@@ -13,7 +14,6 @@ export interface Products{
   price: number,
   stock_quantity: number,
   is_active: string,
-  id: number,
   categories: string;
 }
 
@@ -28,6 +28,7 @@ export interface Products{
 
 })
 
+  
 export class ProductsComponent implements OnInit {
 
   constructor(private service: ProductsService, private crd: ChangeDetectorRef, private router: Router) { }
@@ -39,6 +40,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(){
     this.findProducts();
     this.loadCategories();
+
   }
 
    findProducts() {
@@ -82,5 +84,12 @@ export class ProductsComponent implements OnInit {
     return category ? category.name : '-';
   }
 
+  getStatusLabel(stock_quantity: number): string {
+    return stock_quantity > 0 ? 'มีสินค้า' : 'สินค้าหมด';
+  } 
+
+  edit(productsId: number) {
+    this.router.navigate(["products/addProducts"], { queryParams: { productsId: productsId, action: "EDIT" } });
+  }
 }
 

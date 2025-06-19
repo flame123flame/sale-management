@@ -28,13 +28,18 @@ export interface addProducts {
 export class AddProductsComponent implements OnInit {
 
   secSection = new FormGroup({
-    id: new FormControl<number | null>(null),
+    price: new FormControl<number | null>(null, Validators.required),
     category_id: new FormControl<number | null>(null),
     stock_quantity: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
     description: new FormControl<string>('', Validators.required),
     is_active: new FormControl<string>('', Validators.required)
   });
+
+  dropdown = [
+    {label: 'มีสินค้า', value: 'Y'},
+    {label: 'สินค้าหมด', value: 'N'}
+  ];
 
   categoryOptions: { label: string, value: number }[] = [];
 
@@ -43,23 +48,17 @@ export class AddProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getCategories().subscribe((res: any) => {
-      this.categoryOptions = res.data.map((cat: any) => ({
-        label: cat.name
-      }));
-    });
+   this.getCategory();
   }
 
   goBack() {
     this.router.navigate(['products']);
   }
 
-
   findById(productsId: number) {
     this.service.findId(productsId).subscribe((response: any) => {
       this.secSection.patchValue(
         {
-          id: response.data.id,
           name: response.data.name,
           category_id: response.data.category_id,
           stock_quantity: response.data.stock_quantity,
@@ -70,4 +69,28 @@ export class AddProductsComponent implements OnInit {
     });
   }
 
+  save(){
+    this.service.createProducts(this.secSection.value).subscribe((response: any) => {
+      this.checks.navigate(["products"]);
+    })
+  }
+
+  edit() {
+    this.service.editProducts(this.secSection.value).subscribe((response: any) => {
+      if (response.status === 200) {
+        this.checks.navigate(["products"]);
+      }
+    })
+  }
+
+  getCategory() {
+    this.service.getCategories().subscribe((res: any) => {
+      this.categoryOptions = res.data.map((cat: any) => ({
+        label: cat.name,
+        value: cat.id
+      }));
+    });
+  }
 }
+
+

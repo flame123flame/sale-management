@@ -39,4 +39,11 @@ constructor(private http: HttpClient) { }
       environment.api_url + '/api/categories/findCategories'
     );
   }
+
+   editProducts(editsProducts: object) {
+    return this.http.post(
+      environment.api_url + '/api/products/edit',
+      editsProducts
+    );
+  }
 }
