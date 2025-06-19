@@ -2,10 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { retry } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Subject } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoriesService {
 
 constructor(private http: HttpClient) { }
