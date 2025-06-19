@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 
@@ -12,9 +13,12 @@ import { SharedAppModule } from 'src/app/shared/shared-app.module';
 })
 export class ProductsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  goBack(){
+    this.router.navigate(['products']);
+  }
 }

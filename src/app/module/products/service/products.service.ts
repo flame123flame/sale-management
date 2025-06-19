@@ -33,4 +33,10 @@ constructor(private http: HttpClient) { }
       environment.api_url + '/api/products/delete?id=' + productsId,
     );
   }
+
+  getCategories() {
+    return this.http.get(
+      environment.api_url + '/api/categories/findCategories'
+    );
+  }
 }

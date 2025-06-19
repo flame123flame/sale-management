@@ -13,8 +13,10 @@ export interface Products{
   price: number,
   stock_quantity: number,
   is_active: string,
-  id: number
+  id: number,
+  categories: string;
 }
+
 
 @Component({
   selector: 'app-products',
@@ -32,9 +34,11 @@ export class ProductsComponent implements OnInit {
   productsFind: Products[] = []
   visibleDelete: boolean = false;
   productsId: number | null = null;
+  categories: { id: number, name: string }[] = [];
   
   ngOnInit(){
     this.findProducts();
+    this.loadCategories();
   }
 
    findProducts() {
@@ -65,5 +69,18 @@ export class ProductsComponent implements OnInit {
       this.findProducts();
     })
   }
+
+  loadCategories() {
+    this.service.getCategories().subscribe((res: any) => {
+      this.categories = res.data;
+      this.crd.markForCheck();
+    });
+  }
+
+  categoriesName(categoriesId:number): string{
+    const category = this.categories.find(c => c.id === categoriesId);
+    return category ? category.name : '-';
+  }
+
 }
 

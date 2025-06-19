@@ -16,6 +16,7 @@
             <th>คำอธิบาย</th>
             <th>ราคา</th>
             <th>จำนวนสินค้า</th>
+            <th>หมวดหมู่</th>
             <th>สั่งซื้อสินค้า</th>
         </tr>
     </ng-template>
@@ -26,6 +27,7 @@
             <td>{{ item.description ?? '-' }}</td>
             <td>{{ item.price ?? '-' | currency:'TH':'symbol':'1.2-2'}} </td>
             <td>{{ item.stock_quantity ?? '-' }} </td>
+            <td>{{ categoriesName(item.category_id) }} </td>
             <td style="width: 180px;">
                 <div class="flex flex-center gap-2">
                     <button class="custom-button" style="background-color: #6366f1;">

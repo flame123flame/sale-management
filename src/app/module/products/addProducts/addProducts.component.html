@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="secSection">
   <div class="p-3">
     <div class="grid">
       <div class="col-12 md:col-6 lg:col-6">
@@ -29,13 +29,28 @@
         <div class="p-fluid">
           <label>จำนวนสินค้า <span style="color: red">*</span></label>
           <div>
-            <input type="text" pInputText formControlName="email" />
+            <input type="number" pInputText formControlName="quantity" />
           </div>
         </div>
       </div>
-      <p-dropdown>
-        
-      </p-dropdown>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ประเภทสินค้า <span style="color: red">*</span></label>
+            <p-dropdown 
+              [options]="categoryOptions" 
+              optionLabel="label" 
+              formControlName="category_id" 
+              placeholder="เลือกประเภทสินค้า">
+            </p-dropdown>
+        </div>
+      </div>
     </div>
   </div>
 </form>
+
+<div class="grid mt-5" style=" justify-content: center;">
+    <div class="flex gap-4">
+      <p-button  label="บันทึกข้อมูล" severity="success" />
+      <p-button label="กลับ" severity="info"  />
+    </div>
+</div>
