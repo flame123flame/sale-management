@@ -35,12 +35,7 @@ export class AddProductsComponent implements OnInit {
     description: new FormControl<string>('', Validators.required),
     is_active: new FormControl<string>('', Validators.required)
   });
-
-  dropdown = [
-    {label: 'มีสินค้า', value: 'Y'},
-    {label: 'สินค้าหมด', value: 'N'}
-  ];
-
+  
   categoryOptions: { label: string, value: number }[] = [];
 
   action: string = 'ADD';
@@ -111,6 +106,10 @@ export class AddProductsComponent implements OnInit {
         this.secSection.disable();
       }
     });
+  }
+
+   getStatusLabel(stock_quantity: number | null): string {
+    return stock_quantity && stock_quantity > 0 ? 'มีสินค้า' : 'สินค้าหมด';
   }
 }
 
