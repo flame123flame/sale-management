@@ -20,4 +20,8 @@ export class InventoryComponent implements OnInit {
   addZone(){
     this.route.navigate(['inventory/addZone']);
   }
+
+  zoneList(){
+    this.route.navigate(['inventory/zone']);
+  }
 }

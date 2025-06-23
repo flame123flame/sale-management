@@ -22,5 +22,17 @@ constructor(private http: HttpClient) { }
       editZone
     );
   }
-  
+
+  findZone(){
+    return this.http.get(
+      environment.api_url + '/api/zone/findZone'
+    );
+  }
+
+  findId(zoneId: number){
+    return this.http.get(
+        environment.api_url + '/api/zone/findById?id=' + zoneId,
+
+    );
+}
 }
