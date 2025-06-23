@@ -22,6 +22,8 @@ export class AddZoneComponent implements OnInit {
       discountPercent: new FormControl<number | null>(null, Validators.required),
     })
     
+    action: string = 'ADD';
+
   constructor(private service: AddZoneService,
       private router: Router,
       private route: ActivatedRoute ,
@@ -36,10 +38,36 @@ export class AddZoneComponent implements OnInit {
   }
 
   save() {
-    this.service.createZone(this.secSelection.value).subscribe((response: any) => {
-      this.toast.addSingle('success', 'สร้างหมวดหมู่สำเร็จ', 'หมวดหมู่ถูกสร้างเรียบร้อย.');
-      this.router.navigate(['inventory']);
+      if(!this.secSelection.valid){
+        this.toast.addSingle('warn', 'แจ้งเตือน','กรุณากรอกข้อมูลให้ครบถ้วน');
+        return;
+      }
+      if(this.action === 'ADD') {
+      this.service.createZone(this.secSelection.value).subscribe({next: (response: any) => {
+        this.toast.addSingle('success', 'เพิ่มหมวดหมู่สำเร็จ', 'หมวดหมู่ถูกเพิ่มเรียบร้อยแล้ว');
+        this.router.navigate(["inventory"]);
+      },
+      error: (err) => {
+        this.toast.addSingle('error', 'เพิ่มหมวดหมู่ไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการเพิ่มหมวดหมู่');
+      }
+      });
+      }else if(this.action == 'EDIT'){
+        this.service.editZone(this.secSelection.value).subscribe({next: (response: any) => {
+          this.toast.addSingle('success', 'แก้ไขหมวดหมู่สำเร็จ', 'หมวดหมู่ถูกแก้ไขเรียบร้อยแล้ว');
+          this.router.navigate(["inventory"]);
+        },
+        error: (err) => {
+          this.toast.addSingle('error', 'แก้ไขหมวดหมู่ไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการแก้ไขหมวดหมู่');
+        }
+        });
+      }
+    }
+
+    edit() {
+    this.service.editZone(this.secSelection.value).subscribe((response: any) => {
+      if (response.status === 200) {
+        this.router.navigate(["inventory"]);
+      }
     })
   }
-
 }

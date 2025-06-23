@@ -15,4 +15,12 @@ constructor(private http: HttpClient) { }
       createZone
     );
   }
+
+  editZone(editZone: object) {
+    return this.http.post(
+      environment.api_url + '/api/zone/edit',
+      editZone
+    );
+  }
+  
 }

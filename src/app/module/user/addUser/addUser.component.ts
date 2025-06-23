@@ -58,16 +58,30 @@ export class AddUserComponent implements OnInit {
   }
   
   save() {
-    console.log(this.secSection.value)
-    if(this.action === 'ADD') {
-    this.service.createUser(this.secSection.value).subscribe((response: any) => {
-      this.toast.addSingle('success', 'เพิ่มผู้ใช้งานสำเร็จ', 'ผู้ใช้งานถูกเพิ่มเรียบร้อยแล้ว.');
-      this.router.navigate(['user']);
-    })
-    }else if(this.action == "EDIT"){
-      this.edit();
+      if(!this.secSection.valid){
+        this.toast.addSingle('warn', 'แจ้งเตือน','กรุณากรอกข้อมูลให้ครบถ้วน');
+        return;
+      }
+      if(this.action === 'ADD') {
+      this.service.createUser(this.secSection.value).subscribe({next: (response: any) => {
+        this.toast.addSingle('success', 'เพิ่มผู้ใช้งานสำเร็จ', 'ผู้ใช้งานถูกเพิ่มเรียบร้อยแล้ว');
+        this.router.navigate(["user"]);
+      },
+      error: (err) => {
+        this.toast.addSingle('error', 'เพิ่มผู้ใช้งานไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการเพิ่มผู้ใช้งาน');
+      }
+      });
+      }else if(this.action == 'EDIT'){
+        this.service.editUser(this.secSection.value).subscribe({next: (response: any) => {
+          this.toast.addSingle('success', 'แก้ไขผู้ใช้งานสำเร็จ', 'ผู้ใช้งานถูกแก้ไขเรียบร้อยแล้ว');
+          this.router.navigate(["user"]);
+        },
+        error: (err) => {
+          this.toast.addSingle('error', 'แก้ไขผู้ใช้งานไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการแก้ไขผู้ใช้งาน');
+        }
+        });
+      }
     }
-  }
 
   edit() {
     this.service.editUser(this.secSection.value).subscribe((response: any) => {

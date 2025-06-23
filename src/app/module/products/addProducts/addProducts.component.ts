@@ -65,16 +65,31 @@ export class AddProductsComponent implements OnInit {
     });
   }
 
-  save(){
-    if(this.action === 'ADD') {
-    this.service.createProducts(this.secSection.value).subscribe((response: any) => {
-      this.toast.addSingle('success', 'สร้างสินค้าสำเร็จ', 'สินค้าถูกสร้างเรียบร้อยแล้ว.');
-      this.router.navigate(['products']);
-    })
-    }else if(this.action == "EDIT"){
-      this.edit();
+  save() {
+      if(!this.secSection.valid){
+        this.toast.addSingle('warn', 'แจ้งเตือน','กรุณากรอกข้อมูลให้ครบถ้วน');
+        return;
+      }
+      if(this.action === 'ADD') {
+      this.service.createProducts(this.secSection.value).subscribe({next: (response: any) => {
+        this.toast.addSingle('success', 'เพิ่มสินค้าสำเร็จ', 'สินค้าถูกเพิ่มเรียบร้อยแล้ว');
+        this.router.navigate(["products"]);
+      },
+      error: (err) => {
+        this.toast.addSingle('error', 'เพิ่มสินค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการเพิ่มสินค้า');
+      }
+      });
+      }else if(this.action == 'EDIT'){
+        this.service.editProducts(this.secSection.value).subscribe({next: (response: any) => {
+          this.toast.addSingle('success', 'แก้ไขสินค้าสำเร็จ', 'สินค้าถูกแก้ไขเรียบร้อยแล้ว');
+          this.router.navigate(["products"]);
+        },
+        error: (err) => {
+          this.toast.addSingle('error', 'แก้ไขสินค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการแก้ไขสินค้า');
+        }
+        });
+      }
     }
-  }
 
   edit() {
     this.service.editProducts(this.secSection.value).subscribe((response: any) => {

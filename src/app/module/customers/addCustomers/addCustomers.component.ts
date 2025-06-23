@@ -49,16 +49,30 @@ export class AddCustomersComponent implements OnInit {
 }
 
   save() {
-     console.log(this.secSelection.value)
-    if(this.action === 'ADD') {
-    this.service.createCustomer(this.secSelection.value).subscribe((response: any) => {
-      this.toast.addSingle('success', 'เพิ่มลูกค้าสำเร็จ', 'ลูกค้าถูกเพิ่มเรียบร้อยแล้ว.');
-      this.router.navigate(['customers']);
-    })
-    }else if(this.action == "EDIT"){
-      this.edit();
+      if(!this.secSelection.valid){
+        this.toast.addSingle('warn', 'แจ้งเตือน','กรุณากรอกข้อมูลให้ครบถ้วน');
+        return;
+      }
+      if(this.action === 'ADD') {
+      this.service.createCustomer(this.secSelection.value).subscribe({next: (response: any) => {
+        this.toast.addSingle('success', 'เพิ่มลูกค้าสำเร็จ', 'ลูกค้าถูกเพิ่มเรียบร้อยแล้ว');
+        this.router.navigate(["customers"]);
+      },
+      error: (err) => {
+        this.toast.addSingle('error', 'เพิ่มลูกค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการเพิ่มลูกค้า');
+      }
+      });
+      }else if(this.action == 'EDIT'){
+        this.service.editCustomer(this.secSelection.value).subscribe({next: (response: any) => {
+          this.toast.addSingle('success', 'แก้ไขข้อมูลลูกค้าสำเร็จ', 'ข้อมูลลูกค้าถูกแก้ไขเรียบร้อยแล้ว');
+          this.router.navigate(["customers"]);
+        },
+        error: (err) => {
+          this.toast.addSingle('error', 'แก้ไขข้อมูลลูกค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการแก้ไขข้อมูลลูกค้า');
+        }
+        });
+      }
     }
-  }
 
 
   edit() {
