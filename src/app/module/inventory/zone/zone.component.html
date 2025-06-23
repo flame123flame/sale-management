@@ -30,7 +30,7 @@
           <button class="custom-button" style="background-color: #6366f1;" (click)="detail(item.id)">
             <i class="pi pi-file-o" style="font-size: 1rem"></i>
           </button>
-          <button class="custom-button" style="background-color: #ef4444;" >
+          <button class="custom-button" style="background-color: #ef4444;" (click)="confirmDelete(item.id)">
             <i class="pi pi-trash" style="font-size: 1rem"></i>
           </button>
         </div>
@@ -44,3 +44,14 @@
     <p-button label="ย้อนกลับ" severity="info" (click)="goBack()" />
   </div>
 </div>
+
+<p-dialog header="ยืนยันการลบข้อมูล" [modal]="true" [(visible)]="visibleDelete" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-6">
+    คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้? การดำเนินการนี้ไม่สามารถย้อนกลับได้
+  </span>
+
+  <div class="flex justify-end gap-2">
+    <button pButton type="button" label="ยกเลิก" class="p-button-secondary" (click)="visibleDelete = false"></button>
+    <button pButton type="button" label="ยืนยัน" class="p-button-danger" (click)="deleteZone()"></button>
+  </div>
+</p-dialog>

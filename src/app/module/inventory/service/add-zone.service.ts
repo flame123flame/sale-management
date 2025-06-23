@@ -32,7 +32,12 @@ constructor(private http: HttpClient) { }
   findId(zoneId: number){
     return this.http.get(
         environment.api_url + '/api/zone/findById?id=' + zoneId,
-
     );
-}
+  }
+
+  deleteZone(zoneId: number) {
+    return this.http.delete(
+      environment.api_url + '/api/zone/delete?id=' + zoneId
+    );
+  }
 }
