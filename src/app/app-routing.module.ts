@@ -101,7 +101,7 @@ const routes: Routes = [
       layout: LayoutType.AUTH
     },
     children: [
-      { path: '', loadChildren: () => import('./module/inventory/inventory.module').then(m => m.InventoryModule), }
+      { path: '', loadChildren: () => import('./module/inventory/inventory/inventory.module').then(m => m.InventoryModule), }
     ]
   },
 
