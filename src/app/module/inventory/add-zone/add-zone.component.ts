@@ -19,10 +19,11 @@ export class AddZoneComponent implements OnInit {
     id: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
     description: new FormControl<string>(''),
-    discountPercent: new FormControl<number | null>(null, Validators.required),
+    discountPercent: new FormControl<number | null>(null, [Validators.required,Validators.min(0),Validators.max(100)]),
   })
 
   action: string = 'ADD';
+form: any;
 
   constructor(private service: AddZoneService,
     private router: Router,
