@@ -1,0 +1,37 @@
+<form>
+  <div class="p-3">
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ชื่อ<span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+      <div class="p-fluid">
+        <label>รายละเอียด <span style="color: red">*</span></label>
+        <div>
+          <input type="text" pInputText />
+        </div>
+      </div>
+    </div>
+    <div  class="col-12 md:col-6 lg:col-6">
+      <div class="p-fluid">
+        <label>ส่วนลดเปอร์เซ็นต์ <span style="color: red">*</span></label>
+        <div>
+          <input type="number" pInputText />
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</form>
+
+<div class="grid mt-5" style=" justify-content: center;">
+  <div class="flex gap-4">
+    <p-button label="บันทึกข้อมูล" severity="success" />
+    <p-button label="กลับ" severity="info" (click)="goBack()" />
+  </div>
+</div>

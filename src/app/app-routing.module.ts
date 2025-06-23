@@ -92,6 +92,19 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: 'inventory',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    data: {
+      layout: LayoutType.AUTH
+    },
+    children: [
+      { path: '', loadChildren: () => import('./module/inventory/inventory.module').then(m => m.InventoryModule), }
+    ]
+  },
+
 ];
 
 @NgModule({
