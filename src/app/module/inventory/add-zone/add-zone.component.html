@@ -5,33 +5,33 @@
         <div class="p-fluid">
           <label>ชื่อ<span style="color: red">*</span></label>
           <div>
-            <input type="text" pInputText formControlName="name"/>
+            <input type="text" pInputText formControlName="name" />
           </div>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
-      <div class="p-fluid">
-        <label>รายละเอียด <span style="color: red">*</span></label>
-        <div>
-          <input type="text" pInputText formControlName="description"/>
+        <div class="p-fluid">
+          <label>รายละเอียด <span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="description" />
+          </div>
         </div>
       </div>
-    </div>
-    <div  class="col-12 md:col-6 lg:col-6">
-      <div class="p-fluid">
-        <label>ส่วนลด % <span style="color: red">*</span></label>
-        <div>
-          <input type="number" pInputText formControlName="discountPercent" min="0" max="100"/>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ส่วนลด % <span style="color: red">*</span></label>
+          <div>
+            <input type="number" pInputText placeholder="ต้องอยู่ระหว่าง 0 ถึง 100" formControlName="discountPercent" min="0" max="100" />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </form>
 
 <div class="grid mt-5" style=" justify-content: center;">
   <div class="flex gap-4">
-    <p-button label="บันทึกข้อมูล" severity="success" (click)="save()"/>
+    <p-button label="บันทึกข้อมูล" severity="success" (click)="save()" />
     <p-button label="กลับ" severity="info" (click)="goBack()" />
   </div>
 </div>
