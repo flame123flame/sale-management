@@ -25,8 +25,7 @@ export class AddZoneComponent implements OnInit {
   constructor(private service: AddZoneService,
       private router: Router,
       private route: ActivatedRoute ,
-      private checks:Router,
-      private toast: ToastService) { }
+      private toast: ToastService,) { }
 
       
   ngOnInit() {
@@ -38,6 +37,9 @@ export class AddZoneComponent implements OnInit {
 
   save() {
     this.service.createZone(this.secSelection.value).subscribe((response: any) => {
+      this.toast.addSingle('success', 'สร้างหมวดหมู่สำเร็จ', 'หมวดหมู่ถูกสร้างเรียบร้อย.');
+      this.router.navigate(['inventory']);
     })
   }
+
 }

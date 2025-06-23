@@ -9,6 +9,7 @@ import { MessageService } from 'primeng/api';
  * This class provides methods to add single, multiple alerts as a toast
  */
 export class ToastService {
+  [x: string]: any;
   constructor(private messageService: MessageService) { }
 
   /**

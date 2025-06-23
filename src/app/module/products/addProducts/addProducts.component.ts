@@ -6,6 +6,7 @@ import { ProductsService } from '../service/products.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 export interface addProducts {
   id: number;
@@ -40,7 +41,7 @@ export class AddProductsComponent implements OnInit {
 
   action: string = 'ADD';
   constructor(private fb: FormBuilder, private service: ProductsService,
-    private route: ActivatedRoute, private checks: Router, private router: Router) {
+    private route: ActivatedRoute, private router: Router, private toast: ToastService) {
   }
 
   ngOnInit() {
@@ -67,6 +68,8 @@ export class AddProductsComponent implements OnInit {
   save(){
     if(this.action === 'ADD') {
     this.service.createProducts(this.secSection.value).subscribe((response: any) => {
+      this.toast.addSingle('success', 'สร้างสินค้าสำเร็จ', 'สินค้าถูกสร้างเรียบร้อยแล้ว.');
+      this.router.navigate(['products']);
     })
     }else if(this.action == "EDIT"){
       this.edit();
@@ -76,7 +79,7 @@ export class AddProductsComponent implements OnInit {
   edit() {
     this.service.editProducts(this.secSection.value).subscribe((response: any) => {
       if (response.status === 200) {
-        this.checks.navigate(["products"]);
+        this.router.navigate(["products"]);
       }
     })
   }

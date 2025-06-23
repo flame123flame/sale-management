@@ -6,6 +6,7 @@ import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { UserService } from '../service/user.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { take } from 'rxjs';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 export interface addUser {
   nickName: string;
@@ -36,7 +37,7 @@ export class AddUserComponent implements OnInit {
   action: string = 'ADD';
 
   constructor(private fb: FormBuilder, private service: UserService, 
-    private route: ActivatedRoute, private checks: Router, private router: Router) { }
+    private route: ActivatedRoute, private router: Router, private toast: ToastService,) { }
 
   ngOnInit() {
     this.route.queryParams.pipe(take(1)).subscribe((params) => {
@@ -60,6 +61,8 @@ export class AddUserComponent implements OnInit {
     console.log(this.secSection.value)
     if(this.action === 'ADD') {
     this.service.createUser(this.secSection.value).subscribe((response: any) => {
+      this.toast.addSingle('success', 'เพิ่มผู้ใช้งานสำเร็จ', 'ผู้ใช้งานถูกเพิ่มเรียบร้อยแล้ว.');
+      this.router.navigate(['user']);
     })
     }else if(this.action == "EDIT"){
       this.edit();
@@ -69,13 +72,13 @@ export class AddUserComponent implements OnInit {
   edit() {
     this.service.editUser(this.secSection.value).subscribe((response: any) => {
       if (response.status === 200) {
-        this.checks.navigate(["user"]);
+        this.router.navigate(["user"]);
       }
     })
   }
 
   check() {
-    this.checks.navigate(["user"]);
+    this.router.navigate(["user"]);
   }
 
   findById(userId: number) {

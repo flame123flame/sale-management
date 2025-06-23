@@ -5,6 +5,7 @@ import { CustomersService } from '../service/customers.service';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { take } from 'rxjs';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-addCustomers',
@@ -25,7 +26,7 @@ export class AddCustomersComponent implements OnInit {
 
   action: string = 'ADD';
 
-  constructor(private service: CustomersService,private router: Router,private route: ActivatedRoute,private checks: Router) { }
+  constructor(private service: CustomersService,private router: Router,private route: ActivatedRoute,private checks: Router,private toast: ToastService, ) { }
 
   ngOnInit() {
     this.route.queryParams.pipe(take(1)).subscribe((params) => {
@@ -51,6 +52,8 @@ export class AddCustomersComponent implements OnInit {
      console.log(this.secSelection.value)
     if(this.action === 'ADD') {
     this.service.createCustomer(this.secSelection.value).subscribe((response: any) => {
+      this.toast.addSingle('success', 'เพิ่มลูกค้าสำเร็จ', 'ลูกค้าถูกเพิ่มเรียบร้อยแล้ว.');
+      this.router.navigate(['customers']);
     })
     }else if(this.action == "EDIT"){
       this.edit();
