@@ -7,15 +7,19 @@ import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { AddZoneComponent } from '../zone/add-zone/add-zone.component';
 import { ZoneComponent } from '../zone/zone.component';
+import { AddInventoryComponent } from './add-inventory/add-inventory.component';
 
 const routes: Routes = [
   {path: '', component: InventoryComponent},
   {path: 'addZone', component: AddZoneComponent},
   {path: 'zone', component: ZoneComponent},
+  {path: 'addInventory', component: AddInventoryComponent},
 ];
 
 @NgModule({
-  declarations: [],
-    imports: [RouterModule.forChild(routes), PrimeNgModule, SharedAppModule, HttpClientModule],
+  declarations: [
+    // AddInventoryComponent
+  ],
+    imports: [RouterModule.forChild(routes), PrimeNgModule, SharedAppModule, HttpClientModule,AddInventoryComponent],
 })
 export class InventoryModule { }
