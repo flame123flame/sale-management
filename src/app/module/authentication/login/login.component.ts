@@ -35,9 +35,11 @@ export class LoginComponent implements OnInit {
 
   errorDialog(error: any) {
     console.log(error.error.message)
+    // console.log(error.status);
+    
     if (error.status === 401) {
       this._toastService.addSingle('error', 'เข้าสู่ระบบล้มเหลว', 'รหัสผ่านของคุณไม่ถูกต้อง');
-    } else if (error.error.message == 'INVALID_USER') {
+    } else if (error.error.message == 'NO_USER_FOUND') {
       this._toastService.addSingle('error', 'เข้าสู่ระบบล้มเหลว', 'ไม่พบผู้ใช้งานในระบบ');
     } else {
       this._toastService.addSingle('error', 'เกิดข้อผิดพลาด', 'เกิดข้อผิดพลาดจากระบบ');
@@ -97,7 +99,8 @@ export class LoginComponent implements OnInit {
           error: error => {
             this.errorDialog(error)
           },
-        });
+        }
+      );
     }
 
 

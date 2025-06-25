@@ -29,7 +29,7 @@
         <div class="p-fluid">
           <label>ราคาขาย <span style="color: red">*</span></label>
           <div>
-            <input type="number" pInputText formControlName="priceSale" />
+            <p-inputNumber mode="currency" currency="THB" type="number" formControlName="priceSale" />
           </div>
         </div>
       </div>
@@ -37,23 +37,48 @@
         <div class="p-fluid">
           <label>ส่วนลดโซน <span style="color: red">*</span></label>
           <div>
-            <input pInputText [value]="getZoneDiscount(secSection.value.zoneId ?? null) + ' %'"  readonly />          </div>
+            <input pInputText [value]="getZoneDiscount(secSection.value.zoneId ?? null) !== null ? getZoneDiscount(secSection.value.zoneId ?? null) + ' %' :''" readonly />
+          </div>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
         <div class="p-fluid">
           <label>สถานะสินค้า <span style="color: red">*</span></label>
-          <p-dropdown [options]="statusOptions" formControlName="status"
-            placeholder="เลือกสถานะสินค้า">
-          </p-dropdown>
+          <div class="flex gap-3">
+            <p-radioButton
+              name="status"
+              value="ACTIVE"
+              formControlName="status"
+              inputId="statusActive"
+            ></p-radioButton>
+            <label for="statusActive">เปิดการขายสินค้า</label>
+
+            <p-radioButton
+              name="status"
+              value="DISIBLE"
+              formControlName="status"
+              inputId="statusDisable"
+            ></p-radioButton>
+            <label for="statusDisable">ปิดการขายสินค้า</label>
+          </div>
+
+            
+          
         </div>
+        <div>ราคาต้นทุน: {{getProductPrice(secSection.value.productId ?? null)}} </div>
         <div>
-            ราคารวม: {{ getTotalPrice(secSection.value.priceSale, secSection.value.quantity) }}</div>
-            <div>ราคาต่อหน่วย: {{ getPricediscount(secSection.value.priceSale, secSection.value.zoneId) }}</div>
-            ราคาต่อหน่วยหลังส่วนลด: {{ getTotalPriceWithDiscount(secSection.value.priceSale, secSection.value.quantity, secSection.value.zoneId) }}
+          ราคารวม: {{ getTotalPrice(secSection.value.priceSale, secSection.value.quantity) }}</div>
+        <div>ราคาต่อหน่วยหลังส่วนลด: {{ getPricediscount(secSection.value.priceSale, getZoneDiscount(secSection.value.zoneId ?? null)) }}</div>
+        ราคารวมหลังส่วนลด: {{ getTotalPriceWithDiscount(secSection.value.priceSale, secSection.value.quantity,
+        getZoneDiscount(secSection.value.zoneId ?? null)) }}
+        <div>กำไรต่อชิ้น: {{ getProfit(getPricediscount(secSection.value.priceSale, getZoneDiscount(secSection.value.zoneId ?? null)), getProductPrice(secSection.value.productId ?? null)) | number:'1.2-2' }} THB</div>
+          <div>กำไรรวม {{getTotalProfit(getProfit(getPricediscount(secSection.value.priceSale, getZoneDiscount(secSection.value.zoneId ?? null)), getProductPrice(secSection.value.productId ?? null)),secSection.value.quantity)| number:'1.2-2' }} THB</div>
+          
       </div>
 
       
+
+
     </div>
   </div>
 </form>
@@ -64,4 +89,3 @@
     <p-button label="กลับ" severity="info" (click)="goBack()" />
   </div>
 </div>
-

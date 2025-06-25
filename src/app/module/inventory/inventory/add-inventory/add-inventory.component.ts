@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, Validators ,ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
@@ -7,9 +7,10 @@ import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { InventoryService } from '../../service/inventory.service';
+ import { RadioButtonModule } from 'primeng/radiobutton';
 
 
-export interface addInventory {
+export interface AddInventory {
   id: number;
   priceSale: number;
   quantity: number;
@@ -30,7 +31,7 @@ export interface addInventory {
   styleUrls: ['./add-inventory.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [PrimeNgModule, SharedAppModule, FormsModule, AutoCompleteModule, DropdownModule]
+  imports: [PrimeNgModule, SharedAppModule, FormsModule, AutoCompleteModule, DropdownModule, RadioButtonModule,ReactiveFormsModule]
 })
 export class AddInventoryComponent implements OnInit {
 
@@ -42,7 +43,7 @@ export class AddInventoryComponent implements OnInit {
     status: new FormControl<string>('', Validators.required),
     productId: new FormControl<number | null>(null, Validators.required),
     zoneId: new FormControl<number | null>(null, Validators.required),
-    userId: new FormControl<number | null>(null)
+    userId: new FormControl<number | null>(null),
   });
   statusOptions: { label: string, value: string }[] = [
     { label: 'เปิดการขายสินค้า', value: 'ACTIVE' },
@@ -51,8 +52,10 @@ export class AddInventoryComponent implements OnInit {
   productsList: { label: string, value: number }[] = [];
   zoneList: { label: string, value: number }[] = [];
   zoneDiscount: { label: number, value: number }[] = [];
+  productPrice: { label: number, value: number }[] = [];
 
   action: string = 'ADD';
+ingredient: any;
   constructor(private fb: FormBuilder
     , private service: InventoryService
     , private router: Router, private route: ActivatedRoute, private toast: ToastService
@@ -121,6 +124,10 @@ export class AddInventoryComponent implements OnInit {
         label: item.name,
         value: item.id
       }));
+      this.productPrice = res.data.map((item: any) => ({
+        label: item.price,
+        value: item.id
+      }));
     }); }
 
     getZone() {
@@ -136,9 +143,14 @@ export class AddInventoryComponent implements OnInit {
       });
     }
 
-    getZoneDiscount(zoneId: number | null): number | '' {
+    getZoneDiscount(zoneId: number | null): number | null {
       const match = this.zoneDiscount.find(d => d.value === zoneId);
-      return match ? match.label : '';
+      return match ? match.label : null;
+    }
+
+    getProductPrice(productId: number | null): number | null {
+      const match = this.productPrice.find(p => p.value === productId);
+      return match ? match.label : 0;
     }
   editOrDetail() {
     this.route.queryParams.subscribe((params) => {
@@ -169,6 +181,16 @@ export class AddInventoryComponent implements OnInit {
       return discountedPrice * (quantity ?? 0);
     }
 
+    getProfit(getPricediscount: number| null | undefined, productPrice: number| null | undefined): number {
+      return (getPricediscount ?? 0) - (productPrice ?? 0);
+
+    }
+    // console.log('getProfit', this.getProfit(100, 50));
+    
+
+    getTotalProfit(getProfit: number| null | undefined, quantity: number| null | undefined): number {
+      return (getProfit ?? 0) * (quantity ?? 0);
+    }
     
 
     

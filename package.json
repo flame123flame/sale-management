@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "ng serve  --host 0.0.0.0  --proxy-config proxy.conf.json --open --configuration=dev",
     "build": "ng build --configuration production --baseHref=/ --configuration production --buildOptimizer=true  --aot --output-hashing=all",
-    "build:production": "ng build --optimization=true --base-href=/utcc-web-uat/ --aot=true --configuration=production --output-hashing=all",
+    "build:production": "ng build --optimization=true --base-href=/work-shop/ --aot=true --configuration=production --output-hashing=all",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

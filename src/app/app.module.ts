@@ -50,7 +50,8 @@ import { CategoriesComponent } from './module/categories/categories.component';
     ConfirmPopupModule,
     CardModule,
     TabMenuModule,
-    TabViewModule
+    TabViewModule,
+    
   ],
   providers: [MessageService, ConfirmationService, { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true }],
 

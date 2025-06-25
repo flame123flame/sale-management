@@ -29,7 +29,7 @@
       <td>{{ productName(item.productId) }}</td>
       <td>{{ item.quantity ?? '-' }}</td>
       <td>{{ item.status ?? '-' }}</td>
-      <td>{{ item.priceSale ?? '-' }}</td>
+      <td>{{ item.priceSale ?? '-' | number:'1.2-2' }} THB</td>
       <td>{{ zoneName(item.zoneId) }}</td>
       <td>{{ zoneDiscount(item.zoneId) }}</td>
       <td>{{ userName(item.userId) }}</td>
