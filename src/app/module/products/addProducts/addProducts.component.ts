@@ -14,8 +14,6 @@ export interface addProducts {
   description: string;
   category_id: number;
   price: number;
-  stock_quantity: number;
-  is_active: string;
 }
 
 @Component({
@@ -32,10 +30,8 @@ export class AddProductsComponent implements OnInit {
     id: new FormControl<number | null>(null),
     price: new FormControl<number | null>(null, Validators.required),
     category_id: new FormControl<number | null>(null),
-    stock_quantity: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
     description: new FormControl<string>('', Validators.required),
-    is_active: new FormControl<string>('')
   });
 
   categoryOptions: { label: string, value: number }[] = [];
@@ -60,11 +56,8 @@ export class AddProductsComponent implements OnInit {
         name: res.data.name,
         description: res.data.description,
         price: res.data.price,
-        stock_quantity: res.data.stock_quantity,
         category_id: res.data.category_id,
-        is_active: res.data.is_active
       });
-      this.setStatusByStock();
     });
   }
 
@@ -130,15 +123,6 @@ export class AddProductsComponent implements OnInit {
       }
     });
   }
-
-  getStatusLabel(stock_quantity: number | null): string {
-    return stock_quantity && stock_quantity > 0 ? 'มีสินค้า' : 'สินค้าหมด';
-  }
-
-  setStatusByStock() {
-  const qty = this.secSection.get('stock_quantity')?.value;
-  this.secSection.get('is_active')?.setValue(typeof qty === 'number' && qty > 0 ? 'Y' : 'N', { emitEvent: false });
-}
 }
 
 

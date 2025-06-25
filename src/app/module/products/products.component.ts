@@ -12,8 +12,6 @@ export interface Products{
   name: string,
   description: string,
   price: number,
-  stock_quantity: number,
-  is_active: string,
   categories: string;
 }
 
@@ -83,10 +81,6 @@ export class ProductsComponent implements OnInit {
     const category = this.categories.find(c => c.id === categoriesId);
     return category ? category.name : '-';
   }
-
-  getStatusLabel(stock_quantity: number): string {
-    return stock_quantity > 0 ? 'มีสินค้า' : 'สินค้าหมด';
-  } 
 
   edit(productsId: number) {
     this.router.navigate(["products/addProducts"], { queryParams: { productsId: productsId, action: "EDIT" } });

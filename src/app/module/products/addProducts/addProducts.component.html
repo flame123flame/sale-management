@@ -27,32 +27,10 @@
       </div>
       <div class="col-12 md:col-6 lg:col-6">
         <div class="p-fluid">
-          <label>จำนวนสินค้า <span style="color: red">*</span></label>
-          <div>
-            <input type="number" pInputText formControlName="stock_quantity" (input)="setStatusByStock()" />
-          </div>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-6">
-        <div class="p-fluid">
           <label>ประเภทสินค้า <span style="color: red">*</span></label>
           <p-dropdown [options]="categoryOptions" optionValue="value" optionLabel="label" formControlName="category_id"
             placeholder="เลือกประเภทสินค้า">
           </p-dropdown>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-6">
-        <div class="p-fluid">
-          <label>สถานะสินค้า</label>
-          <div class="flex align-items-center gap-3">
-            <p-radioButton name="is_active" value="Y" formControlName="is_active" inputId="active-yes"
-              [disabled]="true">
-            </p-radioButton>
-            <label for="active-yes">มีสินค้า</label>
-            <p-radioButton name="is_active" value="N" formControlName="is_active" inputId="active-no" [disabled]="true">
-            </p-radioButton>
-            <label for="active-no">สินค้าหมด</label>
-          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
  */
 
 /* ==== Dev ==== */
-const apiUrl = `http://49.0.80.15:5566/awa-workshop-api`;
+const apiUrl = `http://localhost:9000/awa-social-api`;
 const apiAuthenticationUrl = '/authenticate/login';
 
 export const environment = {
