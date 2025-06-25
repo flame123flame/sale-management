@@ -35,7 +35,7 @@ export class AddProductsComponent implements OnInit {
     stock_quantity: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
     description: new FormControl<string>('', Validators.required),
-    is_active: new FormControl<string>('Y', Validators.required)
+    is_active: new FormControl<string>('')
   });
 
   categoryOptions: { label: string, value: number }[] = [];
