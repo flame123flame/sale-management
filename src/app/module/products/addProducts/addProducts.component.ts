@@ -29,6 +29,7 @@ export interface addProducts {
 export class AddProductsComponent implements OnInit {
 
   secSection = new FormGroup({
+    id: new FormControl<number | null>(null),
     price: new FormControl<number | null>(null, Validators.required),
     category_id: new FormControl<number | null>(null),
     stock_quantity: new FormControl<number | null>(null),
@@ -46,7 +47,6 @@ export class AddProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getCategory();
-    this.getStatus();
   }
 
   goBack() {
@@ -56,6 +56,7 @@ export class AddProductsComponent implements OnInit {
   findByIdPro(productsId: number) {
     this.service.findByIdPro(productsId).subscribe((res: any) => {
       this.secSection.patchValue({
+        id: res.data.id,
         name: res.data.name,
         description: res.data.description,
         price: res.data.price,
@@ -63,6 +64,7 @@ export class AddProductsComponent implements OnInit {
         category_id: res.data.category_id,
         is_active: res.data.is_active
       });
+      this.setStatusByStock();
     });
   }
 
@@ -133,15 +135,10 @@ export class AddProductsComponent implements OnInit {
     return stock_quantity && stock_quantity > 0 ? 'มีสินค้า' : 'สินค้าหมด';
   }
 
-  getStatus() {
-    this.secSection.get('stock_quantity')?.valueChanges.subscribe(qty => {
-      if (qty === 0) {
-        this.secSection.get('is_active')?.setValue('N');
-      } else if (qty !== null && qty > 0) {
-        this.secSection.get('is_active')?.setValue('Y');
-      }
-    });
-  }
+  setStatusByStock() {
+  const qty = this.secSection.get('stock_quantity')?.value;
+  this.secSection.get('is_active')?.setValue(typeof qty === 'number' && qty > 0 ? 'Y' : 'N', { emitEvent: false });
+}
 }
 
 
