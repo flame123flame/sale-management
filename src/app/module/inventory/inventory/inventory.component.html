@@ -7,31 +7,31 @@
     <i class="pi pi-bars" style="font-size: 1rem"></i>
   </p-button>
 </div>
-<p-table #datatableBusLine [value]="findInventory" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"
+<p-table  #datatableBusLine [value]="findInventory" styleClass="p-datatable-gridlines text-center" [paginator]="true" [rows]="10"
   [showCurrentPageReport]="true" currentPageReportTemplate="แสดง {first} ถึง {last} จาก {totalRecords} ทั้งหมดรายการ"
   [rowsPerPageOptions]="[10, 25, 50]">
   <ng-template pTemplate="header">
-    <tr>
-      <th>ลำดับ</th>
-      <th>ชื่อสินค้า</th>
-      <th>จำนวน</th>
-      <th>สถานะสินค้า</th>
-      <th>ราคาขาย</th>
-      <th>โซน</th>
-      <th>ส่วนลด</th>
-      <th>สร้างโดย</th>
-      <th>จัดการ</th>
+    <tr class="text-center">
+      <th class="text-center">ลำดับ</th>
+      <th class="text-center">ชื่อสินค้า</th>
+      <th class="text-center">จำนวน</th>
+      <th class="text-center">สถานะสินค้า</th>
+      <th class="text-center">ราคาขาย</th>
+      <th class="text-center">โซน</th>
+      <th class="text-center">ส่วนลด</th>
+      <th class="text-center">สร้างโดย</th>
+      <th class="text-center">จัดการ</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item let-i="rowIndex">
     <tr>
-      <td>{{ i + 1 }}</td>
+      <td class="text-center">{{ i + 1 }}</td>
       <td>{{ productName(item.productId) }}</td>
-      <td>{{ item.quantity ?? '-' }}</td>
+      <td class="text-right">{{ item.quantity ?? '-' }}</td>
       <td>{{ item.status ?? '-' }}</td>
-      <td>{{ item.priceSale ?? '-' | number:'1.2-2' }} THB</td>
+      <td class="text-right">{{ item.priceSale ?? '-' | number:'1.2-2' }} THB</td>
       <td>{{ zoneName(item.zoneId) }}</td>
-      <td>{{ zoneDiscount(item.zoneId) }}</td>
+      <td class="text-right">{{ zoneDiscount(item.zoneId) }}</td>
       <td>{{ userName(item.userId) }}</td>
       <td style="width: 180px;">
         <div class="flex flex-center gap-2">
