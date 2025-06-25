@@ -8,17 +8,17 @@
   [rowsPerPageOptions]="[10, 25, 50]">
   <ng-template pTemplate="header">
     <tr>
-      <th>ลำดับ</th>
-      <th>ชื่อ</th>
-      <th>ที่อยู่</th>
-      <th>เบอร์โทร</th>
-      <th>อีเมล</th>
-      <th>จัดการ</th>
+      <th class="text-center">ลำดับ</th>
+      <th class="text-center">ชื่อ</th>
+      <th class="text-center">ที่อยู่</th>
+      <th class="text-center">เบอร์โทร</th>
+      <th class="text-center">อีเมล</th>
+      <th class="text-center">จัดการ</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item let-i="rowIndex">
     <tr>
-      <td>{{ i + 1 }}</td>
+      <td class="text-center">{{ i + 1 }}</td>
       <td>{{ item.fullName ?? '-' }}</td>
       <td>{{ item.address ?? '-' }}</td>
       <td>{{ item.phone ?? '-' }} </td>

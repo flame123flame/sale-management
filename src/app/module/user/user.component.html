@@ -8,16 +8,16 @@
   [rowsPerPageOptions]="[10, 25, 50]">
   <ng-template pTemplate="header">
     <tr>
-      <th>ลำดับ</th>
-      <th>ชื่อ</th>
-      <th>ชื่อเล่น</th>
-      <th>ชื่อเต็ม</th>
-      <th>จัดการ</th>
+      <th class="text-center">ลำดับ</th>
+      <th class="text-center">ชื่อ</th>
+      <th class="text-center">ชื่อเล่น</th>
+      <th class="text-center">ชื่อเต็ม</th>
+      <th class="text-center">จัดการ</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item let-i="rowIndex">
     <tr>
-      <td>{{ i + 1 }}</td>
+      <td class="text-center">{{ i + 1 }}</td>
       <td>{{ item.username ?? '-' }}</td>
       <td>{{ item.nickName ?? '-' }}</td>
       <td>{{ item.fullName ?? '-' }} </td>
