@@ -34,9 +34,9 @@ export class AddProductsComponent implements OnInit {
     stock_quantity: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
     description: new FormControl<string>('', Validators.required),
-    is_active: new FormControl<string>('', Validators.required)
+    is_active: new FormControl<string>('Y', Validators.required)
   });
-  
+
   categoryOptions: { label: string, value: number }[] = [];
 
   action: string = 'ADD';
@@ -45,7 +45,8 @@ export class AddProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.getCategory();
+    this.getCategory();
+    this.getStatus();
   }
 
   goBack() {
@@ -66,30 +67,32 @@ export class AddProductsComponent implements OnInit {
   }
 
   save() {
-      if(!this.secSection.valid){
-        this.toast.addSingle('warn', 'แจ้งเตือน','กรุณากรอกข้อมูลให้ครบถ้วน');
-        return;
-      }
-      if(this.action === 'ADD') {
-      this.service.createProducts(this.secSection.value).subscribe({next: (response: any) => {
-        this.toast.addSingle('success', 'เพิ่มสินค้าสำเร็จ', 'สินค้าถูกเพิ่มเรียบร้อยแล้ว');
-        this.router.navigate(["products"]);
-      },
-      error: (err) => {
-        this.toast.addSingle('error', 'เพิ่มสินค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการเพิ่มสินค้า');
-      }
+    if (!this.secSection.valid) {
+      this.toast.addSingle('warn', 'แจ้งเตือน', 'กรุณากรอกข้อมูลให้ครบถ้วน');
+      return;
+    }
+    if (this.action === 'ADD') {
+      this.service.createProducts(this.secSection.value).subscribe({
+        next: (response: any) => {
+          this.toast.addSingle('success', 'เพิ่มสินค้าสำเร็จ', 'สินค้าถูกเพิ่มเรียบร้อยแล้ว');
+          this.router.navigate(["products"]);
+        },
+        error: (err) => {
+          this.toast.addSingle('error', 'เพิ่มสินค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการเพิ่มสินค้า');
+        }
       });
-      }else if(this.action == 'EDIT'){
-        this.service.editProducts(this.secSection.value).subscribe({next: (response: any) => {
+    } else if (this.action == 'EDIT') {
+      this.service.editProducts(this.secSection.value).subscribe({
+        next: (response: any) => {
           this.toast.addSingle('success', 'แก้ไขสินค้าสำเร็จ', 'สินค้าถูกแก้ไขเรียบร้อยแล้ว');
           this.router.navigate(["products"]);
         },
         error: (err) => {
           this.toast.addSingle('error', 'แก้ไขสินค้าไม่สำเร็จ', err.error.messageTh || 'เกิดข้อผิดพลาดในการแก้ไขสินค้า');
         }
-        });
-      }
+      });
     }
+  }
 
   edit() {
     this.service.editProducts(this.secSection.value).subscribe((response: any) => {
@@ -126,9 +129,20 @@ export class AddProductsComponent implements OnInit {
     });
   }
 
-   getStatusLabel(stock_quantity: number | null): string {
+  getStatusLabel(stock_quantity: number | null): string {
     return stock_quantity && stock_quantity > 0 ? 'มีสินค้า' : 'สินค้าหมด';
   }
+
+  getStatus() {
+    this.secSection.get('stock_quantity')?.valueChanges.subscribe(qty => {
+      if (qty === 0) {
+        this.secSection.get('is_active')?.setValue('N');
+      } else if (qty !== null && qty > 0) {
+        this.secSection.get('is_active')?.setValue('Y');
+      }
+    });
+  }
 }
+
 
 

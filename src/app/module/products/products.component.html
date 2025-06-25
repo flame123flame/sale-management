@@ -26,7 +26,7 @@
             <td>{{ i + 1 }}</td>
             <td>{{ item.name ?? '-' }}</td>
             <td>{{ item.description ?? '-' }}</td>
-            <td>{{ item.price ?? '-' | currency:'TH':'symbol':'1.2-2'}} </td>
+            <td>{{ item.price | number:'1.2-2' }} TH </td>
             <td>{{ item.stock_quantity ?? '-' }} </td>
             <td>{{ categoriesName(item.category_id) }} </td>
             <td>{{ getStatusLabel(item.stock_quantity) }}</td>

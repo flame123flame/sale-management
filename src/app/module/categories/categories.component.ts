@@ -69,6 +69,5 @@ export class CategoriesComponent implements OnInit {
           this.toast.addSingle('error', 'ลบหมวดหมู่ไม่สำเร็จ', errorMessage);
         }
       });
-
     }
   }
