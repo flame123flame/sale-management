@@ -21,7 +21,7 @@
       <div class="p-fluid">
         <label>เบอร์โทร <span style="color: red">*</span></label>
         <div>
-          <input type="number" pInputText formControlName="phone"/>
+          <input type="text" pInputText formControlName="phone"/>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
 
 <div class="grid mt-5" style=" justify-content: center;">
     <div class="flex gap-4">
-      <p-button [hidden]="this.action == 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()"/>
+      <p-button [hidden]="this.action == 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()"[disabled]="secSelection.invalid"/>
       <p-button label="กลับ" severity="info" (click)="goBack()" />
     </div>
 </div>

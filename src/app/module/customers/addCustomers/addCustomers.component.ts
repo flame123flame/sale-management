@@ -20,7 +20,7 @@ export class AddCustomersComponent implements OnInit {
     id: new FormControl<number | null>(null),
     fullName: new FormControl<string>('',Validators.required),
     email: new FormControl<string>('',[Validators.required, Validators.email]),
-    phone: new FormControl('',[Validators.required,Validators.pattern('^[0-9]{10}$')]),
+    phone: new FormControl('',[Validators.required, Validators.pattern('^[0-9]{10}$')]),
     address: new FormControl<string>('',Validators.required),
   })
 

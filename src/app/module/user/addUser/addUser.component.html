@@ -1,45 +1,45 @@
-<form [formGroup]="secSection"> 
+<form [formGroup]="secSection">
   <div class="p-3">
-  <div class="grid">
-    <div class="col-12 md:col-6 lg:col-6">
-      <div class="p-fluid">
-        <label>ชื่อเล่น<span style="color: red">*</span></label>
-        <div>
-          <input type="text" pInputText formControlName="nickName" />
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ชื่อเล่น<span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="nickName" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ชื่อเต็ม<span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="fullName" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>ชื่อผู้ใช้งาน <span style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="username" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="p-fluid">
+          <label>รหัสผ่าน <span *ngIf="action == 'ADD'" style="color: red">*</span></label>
+          <div>
+            <input type="text" pInputText formControlName="password" />
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-6 lg:col-6">
-      <div class="p-fluid">
-        <label>ชื่อเต็ม<span style="color: red">*</span></label>
-        <div>
-          <input type="text" pInputText formControlName="fullName"/>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6 lg:col-6">
-      <div class="p-fluid">
-        <label>ชื่อผู้ใช้งาน <span style="color: red">*</span></label>
-        <div>
-          <input type="text" pInputText formControlName="username"/>
-        </div>
-      </div>
-    </div>
-    <div  class="col-12 md:col-6 lg:col-6">
-      <div class="p-fluid">
-        <label>รหัสผ่าน <span *ngIf="action == 'ADD'" style="color: red">*</span></label>
-        <div>
-          <input type="text" pInputText formControlName="password" />
-        </div>
-      </div>
-    </div>
-  </div>
   </div>
 </form>
 
 <div class="grid mt-5" style=" justify-content: center;">
-    <div class="flex gap-4">
-      <p-button [hidden]="this.action == 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()"/>
-      <p-button label="กลับ" severity="info" (click)="goBack()" />
-    </div>
+  <div class="flex gap-4">
+    <p-button [hidden]="this.action == 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()" />
+    <p-button label="กลับ" severity="info" (click)="goBack()" />
+  </div>
 </div>
