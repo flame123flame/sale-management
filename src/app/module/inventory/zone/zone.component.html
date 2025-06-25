@@ -1,4 +1,3 @@
-<p-toast></p-toast>
 <div class="flex justify-content-end mb-3">
   <p-button label="+ เพิ่มหมวดหมู่สินค้า" (click)="addZone()">
     <i class="pi pi-users" style="font-size: 1rem"></i>
@@ -9,19 +8,19 @@
   [rowsPerPageOptions]="[10, 25, 50]">
   <ng-template pTemplate="header">
     <tr>
-      <th>ลำดับ</th>
-      <th>ชื่อ</th>
-      <th>คำอธิบาย</th>
-      <th>ส่วนลดเปอร์เซ็นต์</th>
-      <th>จัดการ</th>
+      <th class="text-center">ลำดับ</th>
+      <th class="text-center">ชื่อ</th>
+      <th class="text-center">คำอธิบาย</th>
+      <th class="text-center">ส่วนลดเปอร์เซ็นต์</th>
+      <th class="text-center">จัดการ</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item let-i="rowIndex">
     <tr>
-      <td>{{ i + 1 }}</td>
+      <td class="text-center">{{ i + 1 }}</td>
       <td>{{ item.name ?? '-' }}</td>
       <td>{{ item.description ?? '-' }}</td>
-      <td>{{ item.discountPercent + '%'}}</td>
+      <td class="text-right">{{ item.discountPercent + '%'}}</td>
       <td style="width: 180px;">
         <div class="flex justify-center gap-4">
           <button class="custom-button" style="background-color: rgb(224, 171, 37);" (click)="edit(item.id)">
