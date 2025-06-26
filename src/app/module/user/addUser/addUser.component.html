@@ -6,12 +6,9 @@
           <label>ชื่อเล่น<span style="color: red">*</span></label>
           <div>
             <input type="text" pInputText formControlName="nickName" />
-<<<<<<< Updated upstream
-=======
             <small class="p-error" *ngIf="secSection.get('nickName')?.invalid && secSection.get('nickName')?.touched">
               กรุณากรอกชื่อเล่น
             </small>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
@@ -20,12 +17,9 @@
           <label>ชื่อเต็ม<span style="color: red">*</span></label>
           <div>
             <input type="text" pInputText formControlName="fullName" />
-<<<<<<< Updated upstream
-=======
             <small class="p-error" *ngIf="secSection.get('fullName')?.invalid && secSection.get('fullName')?.touched">
               กรุณากรอกชื่อเต็ม
             </small>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
@@ -34,29 +28,24 @@
           <label>ชื่อผู้ใช้งาน <span style="color: red">*</span></label>
           <div>
             <input type="text" pInputText formControlName="username" />
-<<<<<<< Updated upstream
-=======
             <small class="p-error" *ngIf="secSection.get('username')?.invalid && secSection.get('username')?.touched">
               กรุณากรอกชื่อผู้ใช้
             </small>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
         <div class="p-fluid">
-          <label>รหัสผ่าน <span *ngIf="action == 'ADD'" style="color: red">*</span></label>
+          <label>รหัสผ่าน <span *ngIf="action === 'ADD'" style="color: red">*</span></label>
           <div>
-<<<<<<< Updated upstream
-            <input type="text" pInputText formControlName="password" />
-=======
-            <p-password [toggleMask]="true"  formControlName="password" />
+            <p-password *ngIf="action !== 'DETAIL'" [toggleMask]="true" formControlName="password"></p-password>
+            <input *ngIf="action === 'DETAIL'" type="text" pInputText formControlName="password" [disabled]="true" />
             <small class="p-error" *ngIf="secSection.get('password')?.invalid && secSection.get('password')?.touched">
               กรุณากรอกรหัสผ่าน
             </small>
->>>>>>> Stashed changes
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -64,9 +53,6 @@
 
 <div class="grid mt-5" style=" justify-content: center;">
   <div class="flex gap-4">
-<<<<<<< Updated upstream
-    <p-button [hidden]="this.action == 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()" />
-=======
     <p-button *ngIf="secSection.valid && action !== 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()">
     </p-button>
 
@@ -74,7 +60,6 @@
     <p-button *ngIf="secSection.invalid && action !== 'DETAIL'" label="บันทึกข้อมูล" severity="success"
       [disabled]="true">
     </p-button>
->>>>>>> Stashed changes
     <p-button label="กลับ" severity="info" (click)="goBack()" />
   </div>
 </div>

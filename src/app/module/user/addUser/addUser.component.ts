@@ -48,7 +48,7 @@ export class AddUserComponent implements OnInit {
         if (userId) {
           this.findById(userId);
         }
-      }else if (params['action'] == 'DETAIL') { 
+      }else if (params['action'] === 'DETAIL') { 
         this.action = 'DETAIL';
         const userId = Number(params['userId']);
         this.findById(userId);

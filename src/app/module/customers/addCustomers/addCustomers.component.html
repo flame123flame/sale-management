@@ -6,6 +6,9 @@
         <label>ชื่อ<span style="color: red">*</span></label>
         <div>
           <input type="text" pInputText formControlName="fullName" />
+          <small class="p-error" *ngIf="secSelection.get('fullName')?.invalid && secSelection.get('fullName')?.touched">
+            กรุณากรอกชื่อเต็ม
+          </small>
         </div>
       </div>
     </div>
@@ -14,6 +17,9 @@
         <label>ที่อยู่<span style="color: red">*</span></label>
         <div>
           <input type="text" pInputText formControlName="address"/>
+          <small class="p-error" *ngIf="secSelection.get('address')?.invalid && secSelection.get('address')?.touched">
+            กรุณากรอกที่อยู่
+          </small>
         </div>
       </div>
     </div>
@@ -22,6 +28,9 @@
         <label>เบอร์โทร <span style="color: red">*</span></label>
         <div>
           <input type="text" pInputText formControlName="phone"/>
+          <small class="p-error" *ngIf="secSelection.get('phone')?.invalid && secSelection.get('phone')?.touched">
+            กรุณากรอกเบอร์โทร
+          </small>
         </div>
       </div>
     </div>
@@ -30,6 +39,9 @@
         <label>อีเมล <span style="color: red">*</span></label>
         <div>
           <input type="text" pInputText formControlName="email" />
+          <small class="p-error" *ngIf="secSelection.get('email')?.invalid && secSelection.get('email')?.touched">
+            กรุณากรอกอีเมล
+          </small>
         </div>
       </div>
     </div>
@@ -39,7 +51,13 @@
 
 <div class="grid mt-5" style=" justify-content: center;">
     <div class="flex gap-4">
-      <p-button [hidden]="this.action == 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()"[disabled]="secSelection.invalid"/>
-      <p-button label="กลับ" severity="info" (click)="goBack()" />
+    <p-button *ngIf="secSelection.valid && action !== 'DETAIL'" label="บันทึกข้อมูล" severity="success" (click)="save()">
+    </p-button>
+
+    <!-- ปุ่มบันทึก (จาง กดไม่ได้) -->
+    <p-button *ngIf="secSelection.invalid && action !== 'DETAIL'" label="บันทึกข้อมูล" severity="success"
+      [disabled]="true">
+    </p-button>
+     <p-button label="กลับ" severity="info" (click)="goBack()" />
     </div>
 </div>
