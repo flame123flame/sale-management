@@ -7,6 +7,9 @@
           <div>
             <input type="text" pInputText formControlName="name" />
           </div>
+          <small class="p-error" *ngIf="secSelection.get('name')?.invalid && secSelection.get('name')?.touched">
+            กรุณากรอกชื่อ
+          </small>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
@@ -15,6 +18,9 @@
           <div>
             <input type="text" pInputText formControlName="description" />
           </div>
+          <small class="p-error" *ngIf="secSelection.get('description')?.invalid && secSelection.get('description')?.touched">
+            กรุณากรอกคำอธิบาย
+          </small>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
@@ -23,6 +29,9 @@
           <div>
             <input type="number" pInputText placeholder="ต้องอยู่ระหว่าง 0 ถึง 100" formControlName="discountPercent" min="0" max="100" />
           </div>
+          <small class="p-error" *ngIf="secSelection.get('discountPercent')?.invalid && secSelection.get('discountPercent')?.touched">
+            กรุณาระบุส่วนลดระหว่าง 0 ถึง 100
+          </small>
         </div>
       </div>
     </div>

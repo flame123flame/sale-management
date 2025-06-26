@@ -6,6 +6,9 @@
           <label>ชื่อ<span style="color: red">*</span></label>
           <div>
             <input type="text" pInputText formControlName="name" />
+            <small class="p-error" *ngIf="secSection.get('name')?.invalid && secSection.get('name')?.touched">
+              กรุณากรอกชื่อผู้ใช้
+            </small>
           </div>
         </div>
       </div>
@@ -14,6 +17,9 @@
           <label>คำอธิบาย<span style="color: red">*</span></label>
           <div>
             <input type="text" pInputText formControlName="description" />
+            <small class="p-error" *ngIf="secSection.get('description')?.invalid && secSection.get('description')?.touched">
+              กรุณากรอกคำอธิบาย
+            </small>
           </div>
         </div>
       </div>
@@ -22,6 +28,9 @@
           <label>ราคา <span style="color: red">*</span></label>
           <div>
             <input type="number" pInputText formControlName="price" />
+            <small class="p-error" *ngIf="secSection.get('price')?.invalid && secSection.get('price')?.touched">
+              กรุณากรอกราคา
+            </small>
           </div>
         </div>
       </div>

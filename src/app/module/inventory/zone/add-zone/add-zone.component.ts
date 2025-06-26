@@ -18,7 +18,7 @@ export class AddZoneComponent implements OnInit {
   secSelection = new FormGroup({
     id: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
-    description: new FormControl<string>(''),
+    description: new FormControl<string>('', Validators.required),
     discountPercent: new FormControl<number | null>(null, [Validators.required,Validators.min(0),Validators.max(100)]),
   })
 

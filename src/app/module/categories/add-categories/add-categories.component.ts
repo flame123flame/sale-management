@@ -19,7 +19,7 @@ export class AddCategoriesComponent implements OnInit {
   secSelection = new FormGroup({
     id: new FormControl<number | null>(null),
     name: new FormControl<string>('', Validators.required),
-    description: new FormControl<string>(''),
+    description: new FormControl<string>('', Validators.required),
   
   })
 

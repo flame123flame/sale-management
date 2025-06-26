@@ -7,6 +7,9 @@
           <p-dropdown [options]="productsList" optionValue="value" optionLabel="label" formControlName="productId"
             placeholder="เลือกสินค้า">
           </p-dropdown>
+          <small class="p-error" *ngIf="secSection.get('productId')?.invalid && secSection.get('productId')?.touched">
+            กรุณาเลือกสินค้า
+          </small>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
@@ -15,6 +18,9 @@
           <p-dropdown [options]="zoneList" optionValue="value" optionLabel="label" formControlName="zoneId"
             placeholder="เลือกโซน">
           </p-dropdown>
+          <small class="p-error" *ngIf="secSection.get('zoneId')?.invalid && secSection.get('zoneId')?.touched">
+            กรุณาเลือกโซน
+          </small>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
@@ -23,6 +29,9 @@
           <div>
             <input type="number" pInputText formControlName="quantity" />
           </div>
+          <small class="p-error" *ngIf="secSection.get('quantity')?.invalid && secSection.get('quantity')?.touched">
+            กรุณากรอกจำนวนสินค้า
+          </small>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
@@ -31,6 +40,9 @@
           <div>
             <p-inputNumber mode="currency" currency="THB" type="number" formControlName="priceSale" />
           </div>
+          <small class="p-error" *ngIf="secSection.get('priceSale')?.invalid && secSection.get('priceSale')?.touched">
+            กรุณากรอกราคาขาย
+          </small>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-6">
@@ -61,9 +73,9 @@
             ></p-radioButton>
             <label for="statusDisable">ปิดการขายสินค้า</label>
           </div>
-
-            
-          
+          <small class="p-error" *ngIf="secSection.get('status')?.invalid && secSection.get('status')?.touched">
+            กรุณาเลือกสถานะสินค้า
+          </small>
         </div>
         <div>ราคาต้นทุน: {{getProductPrice(secSection.value.productId ?? null)}} </div>
         <div>
