@@ -52,8 +52,9 @@ export class UserComponent implements OnInit {
       this.findUser();
       this.toast.addSingle('success', 'ลบผู้ใช้งานแล้ว', 'ลบผู้ใช้งานเรียบร้อยแล้ว');
       },
-      error: (error: any) => {
-        this.toast.addSingle('error', 'ลบผู้ใช้งานไม่สำเร็จ', 'ไม่สามารถลบผู้ใช้งานได้');
+      error:(err) => {
+          const errorMessage = err.error.messageTh || 'เกิดข้อผิดพลาดในการลบผู้ใช้งาน';
+          this.toast.addSingle('error', 'ลบผู้ใช้งานไม่สำเร็จ', errorMessage);
       }
     });
   }

@@ -132,8 +132,9 @@ export class InventoryComponent implements OnInit {
         this.findInv();
         this.toast.addSingle('success', 'ลบสินค้าแล้ว', 'ลบสินค้าเรียบร้อยแล้ว');
         },
-        error: (error: any) => {
-          this.toast.addSingle('error', 'ลบสินค้าไม่สำเร็จ', 'ไม่สามารถลบสินค้าได้');
+        error:(err) => {
+          const errorMessage = err.error.messageTh || 'เกิดข้อผิดพลาดในการลบสินค้า';
+          this.toast.addSingle('error', 'ลบสินค้าไม่สำเร็จ', errorMessage);
         }
       });
     }

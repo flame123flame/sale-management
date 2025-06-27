@@ -63,8 +63,9 @@ export class CustomersComponent implements OnInit {
       this.findCustomers();
       this.toast.addSingle('success', 'ลบลูกค้าแล้ว', 'ลบลูกค้าเรียบร้อยแล้ว');
       },
-      error: (error: any) => {
-        this.toast.addSingle('error', 'ลบลูกค้าไม่สำเร็จ', 'ไม่สามารถลบลูกค้าได้');
+      error:(err) => {
+          const errorMessage = err.error.messageTh || 'เกิดข้อผิดพลาดในการลบลูกค้า';
+          this.toast.addSingle('error', 'ลบลูกค้าไม่สำเร็จ', errorMessage);
       }
     })
   }
