@@ -29,6 +29,7 @@ export class InventoryComponent implements OnInit {
   findInventory: Inventory[] = [];
   zone: { 
     discountPercent:number ,id: number, name: string }[] = [];
+    
   products: { id: number, name: string }[] = [];
   users:Array<{ id: number, nickName: string,fullName: string }> = [];
   invId: number | null = null;

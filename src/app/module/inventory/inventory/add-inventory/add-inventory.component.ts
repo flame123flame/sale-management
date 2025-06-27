@@ -38,6 +38,7 @@ export class AddInventoryComponent implements OnInit {
 
 
   secSection = new FormGroup({
+    id: new FormControl<number | null>(null),
     priceSale: new FormControl<number | null>(null, Validators.required),
     quantity: new FormControl<number | null>(null, Validators.required),
     status: new FormControl<string>('', Validators.required),
@@ -47,7 +48,7 @@ export class AddInventoryComponent implements OnInit {
   });
   statusOptions: { label: string, value: string }[] = [
     { label: 'เปิดการขายสินค้า', value: 'ACTIVE' },
-    { label: 'ปิดการขายสินค้า', value: 'DISIBLE' }]
+    { label: 'ปิดการขายสินค้า', value: 'DISABLE' }]
 
   productsList: { label: string, value: number }[] = [];
   zoneList: { label: string, value: number }[] = [];
@@ -74,6 +75,8 @@ ingredient: any;
   findByIdInv(inventoryId: number) {
     this.service.findId(inventoryId).subscribe((res: any) => {
       this.secSection.patchValue({
+        id: res.data.id,
+        userId: res.data.userId,
         priceSale: res.data.priceSale,
         quantity: res.data.quantity,
         status: res.data.status,
