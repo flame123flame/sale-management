@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators ,ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -57,9 +57,13 @@ export class AddInventoryComponent implements OnInit {
 
   action: string = 'ADD';
 ingredient: any;
-  constructor(private fb: FormBuilder
-    , private service: InventoryService
-    , private router: Router, private route: ActivatedRoute, private toast: ToastService
+  constructor(
+    private fb: FormBuilder,
+    private service: InventoryService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toast: ToastService,
+    public crd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -131,6 +135,7 @@ ingredient: any;
         label: item.price,
         value: item.id
       }));
+      this.crd.markForCheck();
     }); }
 
     getZone() {
@@ -143,6 +148,7 @@ ingredient: any;
           label: item.discountPercent,
           value: item.id
         }));
+        this.crd.markForCheck();
       });
     }
 
