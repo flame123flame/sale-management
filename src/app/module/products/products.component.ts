@@ -7,6 +7,7 @@ import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { Route, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 export interface Products{
   name: string,
@@ -29,7 +30,7 @@ export interface Products{
   
 export class ProductsComponent implements OnInit {
 
-  constructor(private service: ProductsService, private crd: ChangeDetectorRef, private router: Router) { }
+  constructor(private service: ProductsService, private crd: ChangeDetectorRef, private router: Router, private toast: ToastService) { }
   productsFind: Products[] = []
   visibleDelete: boolean = false;
   productsId: number | null = null;
@@ -65,8 +66,14 @@ export class ProductsComponent implements OnInit {
 
   deletePro(){
     this.visibleDelete = false;
-    this.service.deleteProducts(this.productsId!).subscribe((response: any) => {
+    this.service.deleteProducts(this.productsId!).subscribe({
+      next: (response: any) => {
       this.findProducts();
+      this.toast.addSingle('success', 'ลบสินค้าแล้ว', 'ลบสินค้าสำเร็จแล้ว');
+      },
+      error: (error: any) => {
+        this.toast.addSingle('error', 'ลบสินค้าไม่สำเร็จ', 'ไม่สามารถลบสินค้าได้');
+      }
     })
   }
 

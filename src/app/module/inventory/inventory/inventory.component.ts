@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
 import { InventoryService } from '../service/inventory.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 export interface Inventory {
   id: number;
@@ -23,7 +24,7 @@ export interface Inventory {
 })
 export class InventoryComponent implements OnInit {
 
-  constructor(private route: Router ,private service : InventoryService, private crd:ChangeDetectorRef) { }
+  constructor(private route: Router ,private service : InventoryService, private crd:ChangeDetectorRef, private toast: ToastService) { }
 
 
   findInventory: Inventory[] = [];
@@ -126,8 +127,14 @@ export class InventoryComponent implements OnInit {
   deleteInv() {
     this.visibleDelete = false;
     if (this.inventoryId) {
-      this.service.deleteInv(this.inventoryId).subscribe((response: any) => {
+      this.service.deleteInv(this.inventoryId).subscribe({
+        next: (response: any) => {
         this.findInv();
+        this.toast.addSingle('success', 'ลบสินค้าแล้ว', 'ลบสินค้าเรียบร้อยแล้ว');
+        },
+        error: (error: any) => {
+          this.toast.addSingle('error', 'ลบสินค้าไม่สำเร็จ', 'ไม่สามารถลบสินค้าได้');
+        }
       });
     }
   }

@@ -12,6 +12,7 @@ export interface Customers {
 }
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/services/toast.service';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
@@ -22,7 +23,7 @@ import { Router } from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
-  constructor(private service: CustomersService, private _cdr: ChangeDetectorRef, private router: Router) { }
+  constructor(private service: CustomersService, private _cdr: ChangeDetectorRef, private router: Router, private toast: ToastService) { }
   customersFind: Customers[] = [];
   visibleDelete: boolean = false;
   customerId: number | null = null;
@@ -57,8 +58,14 @@ export class CustomersComponent implements OnInit {
   }
   deleteCustomers() {
     this.visibleDelete = false;
-    this.service.deleteCustomer(this.customerId!).subscribe((response: any) => {
+    this.service.deleteCustomer(this.customerId!).subscribe({
+      next: (response: any) => {
       this.findCustomers();
+      this.toast.addSingle('success', 'ลบลูกค้าแล้ว', 'ลบลูกค้าเรียบร้อยแล้ว');
+      },
+      error: (error: any) => {
+        this.toast.addSingle('error', 'ลบลูกค้าไม่สำเร็จ', 'ไม่สามารถลบลูกค้าได้');
+      }
     })
   }
 }

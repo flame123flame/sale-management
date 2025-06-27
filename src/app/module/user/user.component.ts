@@ -3,6 +3,7 @@ import { UserService } from './service/user.service';
 import { Router } from '@angular/router';
 import { PrimeNgModule } from 'src/app/shared/primeng.module';
 import { SharedAppModule } from 'src/app/shared/shared-app.module';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 export interface User {
   nickName: string;
@@ -21,7 +22,7 @@ export interface User {
 })
 export class UserComponent implements OnInit {
 
-  constructor(private service: UserService, private _cdr: ChangeDetectorRef, private router: Router) { }
+  constructor(private service: UserService, private _cdr: ChangeDetectorRef, private router: Router, private toast: ToastService,) { }
   userFind: User[] = [];
   visibleDelete: boolean = false;
   userId: number | null = null;
@@ -40,14 +41,21 @@ export class UserComponent implements OnInit {
 
   confirmDelete(userId: number) {
     this.visibleDelete = true;
-    this.userId = this.userId;
+    this.userId = userId;
 
   }
 
   deleteUser(){
-    this.service.deleteUser(this.userId!).subscribe((response: any) => {
+    this.visibleDelete = false;
+    this.service.deleteUser(this.userId!).subscribe({
+      next: (response: any) => {
       this.findUser();
-    })
+      this.toast.addSingle('success', 'ลบผู้ใช้งานแล้ว', 'ลบผู้ใช้งานเรียบร้อยแล้ว');
+      },
+      error: (error: any) => {
+        this.toast.addSingle('error', 'ลบผู้ใช้งานไม่สำเร็จ', 'ไม่สามารถลบผู้ใช้งานได้');
+      }
+    });
   }
 
     adminCheck(checkUse: string){
